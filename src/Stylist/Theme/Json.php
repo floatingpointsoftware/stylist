@@ -2,7 +2,7 @@
 
 namespace FloatingPoint\Stylist\Theme;
 
-class ThemeJson
+class Json
 {
     /**
      * Stores the theme object.

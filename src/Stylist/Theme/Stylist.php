@@ -64,4 +64,30 @@ class Stylist
 
         throw new ThemeNotFoundException($themeName);
     }
+
+    /**
+     * Searches for theme.json files within the directory structure specified by $directory and
+     * returns the theme locations found.
+     *
+     * @param $directory
+     * @return array
+     */
+    public function discover($directory)
+    {
+        $themes = [];
+
+        $files = scandir($directory);
+
+        foreach ($files as $file) {
+            if (is_dir($file)) {
+                $this->discover($directory);
+            }
+
+            if ($file == 'theme.json') {
+                $themes[] = $directory;
+            }
+        }
+
+        return array_flatten($themes);
+    }
 }

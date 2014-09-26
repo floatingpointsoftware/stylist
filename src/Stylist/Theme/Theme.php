@@ -55,7 +55,7 @@ class Theme
         static $themeJson = null;
 
         if (is_null($themeJson)) {
-            $themeJson = new ThemeJson($this->getPath());
+            $themeJson = new Json($this->getPath());
         }
 
         if (!is_null($attribute)) {
