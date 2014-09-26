@@ -1,0 +1,102 @@
+build:
+    environment:
+        php: '5.5.12'
+
+filter:
+    paths:
+        - 'src/Stylist/*'
+
+checks:
+    php:
+        code_rating: true
+        duplication: true
+        variable_existence: true
+        useless_calls: true
+        use_statement_alias_conflict: true
+        unused_variables: true
+        unused_properties: true
+        unused_parameters: true
+        unused_methods: true
+        unreachable_code: true
+        sql_injection_vulnerabilities: true
+        security_vulnerabilities: true
+        precedence_mistakes: true
+        precedence_in_conditions: true
+        parameter_non_unique: true
+        no_property_on_interface: true
+        no_non_implemented_abstract_methods: true
+        deprecated_code_usage: true
+        closure_use_not_conflicting: true
+        closure_use_modifiable: true
+        avoid_useless_overridden_methods: true
+        avoid_conflicting_incrementers: true
+        assignment_of_null_return: true
+        classes_in_camel_caps: true
+        avoid_superglobals: true
+        avoid_usage_of_logical_operators: true
+        blank_line_after_namespace_declaration: true
+        encourage_shallow_comparison: true
+        ensure_lower_case_builtin_functions: true
+        fix_doc_comments: true
+        fix_identation_4spaces: true
+        fix_linefeed: true
+        fix_php_opening_tag: true
+        fix_use_statements:
+            remove_unused: true
+            preserve_multiple: false
+            preserve_blanklines: false
+            order_alphabetically: false
+        function_in_camel_caps: true
+        instanceof_class_exists: true
+        lowercase_basic_constants: true
+        lowercase_php_keywords: true
+        no_elseif_statements: true
+        no_eval: true
+        no_exit: true
+        no_global_keyword: true
+        no_goto: true
+        no_short_method_names:
+            minimum: '4'
+        one_class_per_file: true
+        psr2_switch_declaration: true
+        psr2_class_declaration: true
+        psr2_control_structure_declaration: true
+        no_error_suppression: true
+        no_debug_code: true
+        naming_conventions:
+            local_variable: '^[a-z][a-zA-Z0-9]*$'
+            abstract_class_name: ^Abstract|Factory$
+            utility_class_name: 'Utils?$'
+            constant_name: '^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)*$'
+            property_name: '^[a-z][a-zA-Z0-9]*$'
+            method_name: '^(?:[a-z]|__)[a-zA-Z0-9]*$'
+            parameter_name: '^[a-z][a-zA-Z0-9]*$'
+            interface_name: '^[A-Z][a-zA-Z0-9]*Interface$'
+            type_name: '^[A-Z][a-zA-Z0-9]*$'
+            exception_name: '^[A-Z][a-zA-Z0-9]*Exception$'
+            isser_method_name: '^(?:is|has|should|may|supports)'
+        avoid_todo_comments: true
+        avoid_fixme_comments: true
+        avoid_duplicate_types: true
+        too_many_arguments: true
+        single_namespace_per_use: true
+        require_scope_for_properties: true
+        require_scope_for_methods: true
+        require_php_tag_first: true
+        require_braces_around_control_structures: true
+        properties_in_camelcaps: true
+        prefer_unix_line_ending: true
+        no_unnecessary_if: true
+        no_unnecessary_function_call_in_for_loop: true
+
+tools:
+    external_code_coverage: true
+    php_sim: true
+    php_pdepend: true
+    php_analyzer: true
+    php_code_sniffer:
+        config:
+            standard: 'PSR2'
+    sensiolabs_security_checker: true
+    php_cpd: true
+    php_changetracking: true

@@ -1,0 +1,30 @@
+source:
+    - src/Stylist
+
+destination: ./docs/
+
+extensions:
+    - php
+
+title: FloatingPoint Stylist API
+
+#baseUrl: http://oururl.com/grapevine/api
+
+autocomplete:
+    - classes
+    - functions
+    - methods
+    - properties
+
+accessLevels:
+    # default
+    - public
+    - protected
+    # other
+    - private
+
+tree: true
+
+deprecated: true
+
+todo: true
