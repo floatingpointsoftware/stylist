@@ -24,12 +24,7 @@ You're now ready to go!
 
 In order for Stylist to start using themes, you must register at least one theme with the package, and activate it.
 
-    Stylist::register('theme', '/absolute/path/to/theme');
-    Stylist::activate('theme');
-
-You can also do it in one line:
-
-    Stylist::register('theme', '/absolute/path/to/theme', true);
+    Stylist::register('/absolute/path/to/theme', true);
 
 Your theme should contain a theme.json file, which contains some basic information:
 
@@ -37,6 +32,8 @@ Your theme should contain a theme.json file, which contains some basic informati
         "name": "My theme",
         "description": "This is my theme. There are many like it, but this one is mine."
     }
+
+Only one theme can be activated at a time, so multiple calls to activate themes, will simply deactivate the previously activated theme.
 
 So, what happens when you now load views?
 

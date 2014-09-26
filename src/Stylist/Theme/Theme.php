@@ -57,7 +57,7 @@ class Theme
         if (is_null($themeJson)) {
             $themeJson = new ThemeJson($this->getPath());
         }
-        
+
         if (!is_null($attribute)) {
             return $themeJson->getJsonAttribute($attribute);
         }
