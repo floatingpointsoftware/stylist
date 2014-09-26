@@ -1,42 +1,11 @@
 <?php
 
-namespace FloatingPoint\Grapevine;
+namespace FloatingPoint\Stylist;
 
-use FloatingPoint\Grapevine\Library\Commands\Translator;
-use FloatingPoint\Grapevine\Library\Support\ServiceProvider;
-use FloatingPoint\Grapevine\Modules\Categories\CategoriesServiceProvider;
-use FloatingPoint\Grapevine\Modules\Users\UsersServiceProvider;
-use Laracasts\Commander\CommanderServiceProvider;
+use Illuminate\Foundation\AliasLoader;
 
-class GrapevineServiceProvider extends ServiceProvider
+class StylistServiceProvider extends ServiceProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
-    /**
-     * Defines the aliases that this service provider will setup.
-     *
-     * @var array
-     */
-    protected $aliases = [
-        'Laracasts\CommanderCommandTranslator' => Translator::class
-    ];
-
-	/**
-	 * Service providers Grapevine provides to the Laravel framework.
-	 *
-	 * @var array
-	 */
-	protected $serviceProviders = [
-        CategoriesServiceProvider::class,
-        CommanderServiceProvider::class,
-        UsersServiceProvider::class,
-    ];
-
     /**
      * Bootstrap the application events.
      *
@@ -44,16 +13,41 @@ class GrapevineServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package('floatingpoint/grapevine');
+        $this->package('floatingpoint/stylist');
     }
 
     /**
-     * Sets up the routes required by the application.
+     * Registers the various bindings required by other packages.
      */
     public function register()
     {
-        parent::register();
+        $this->registerAlias();
+        $this->registerStylist();
+    }
 
-        require_once __DIR__ . '/Http/routes.php';
+    /**
+     * Sets up the object that will be used for theme registration calls.
+     */
+    private function registerStylist()
+    {
+        $this->app->singleton('stylist', 'FloatingPoint\Stylist\Theme\Stylist');
+    }
+    
+    /**
+     * Stylist class should be accessible from global scope for ease of use.
+     */
+    private function registerAlias()
+    {
+        AliasLoader::getInstance()->alias('Stylist', 'FloatingPoint\Stylist\Facades\Stylist');
+    }
+
+    /**
+     * An array of classes that Stylist provides.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['Stylist'];
     }
 }

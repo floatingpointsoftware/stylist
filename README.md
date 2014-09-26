@@ -31,6 +31,13 @@ You can also do it in one line:
 
     Stylist::register('theme', '/absolute/path/to/theme', true);
 
+Your theme should contain a theme.json file, which contains some basic information:
+
+    {
+        "name": "My theme",
+        "description": "This is my theme. There are many like it, but this one is mine."
+    }
+
 So, what happens when you now load views?
 
 ## How Stylist works
@@ -80,9 +87,10 @@ Themes can have parent themes. What does this mean? It means that you can reques
 
 ### Defining a parent
 
-It's very easy to define a parent for a theme. You just specify the name of the theme:
+It's very easy to define a parent for a theme. You simply define the parent theme inside your theme.json:
 
-    Stylist::register('mytheme', '/path/to/mytheme/', true, 'parenttheme');
+    "parent": "Another theme"
 
-This will ensure that Stylist will first look in your theme's directories for files and assets, and then look int he parent's theme directories. If your theme's parent also has a parent, then it will continue looking up the tree until it finds the file.
+This will ensure that Stylist will first look in your theme's directories for files and assets, and then look in the parent's theme directories. If your theme's parent also has a parent, then it will continue looking up the tree until it finds the file.
 
+Parents do not need to be activated for your theme to make use of them. Only your theme needs to be activated. However, they do need to be registered. This may be handled by the package that manages your theme, or you can register it yourself.
