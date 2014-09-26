@@ -32,7 +32,7 @@ class StylistServiceProvider extends ServiceProvider
     {
         $this->app->singleton('stylist', 'FloatingPoint\Stylist\Theme\Stylist');
     }
-    
+
     /**
      * Stylist class should be accessible from global scope for ease of use.
      */

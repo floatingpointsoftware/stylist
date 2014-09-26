@@ -22,28 +22,29 @@ class Stylist
      * Register a new theme based on its name, and location (path). An optional
      * parameter allows the theme to be activated as soon as its registered.
      *
-     * @param string $theme
      * @param string $path
-     * @param bool $active
+     * @param bool $activate
      */
-    public function register($theme, $path, $active = false)
+    public function register($path, $activate = false)
     {
-        $this->themes[] = new Theme($theme, $path);
+        $registeredTheme = new Theme($path);
 
-        if ($active) {
-            $this->activate($theme);
+        $this->themes[] = $registeredTheme;
+
+        if ($activate) {
+            $this->activate($registeredTheme);
         }
     }
 
     /**
      * Activate a theme by its name.
      *
-     * @param $themeName
+     * @param Theme $theme
      * @throws ThemeNotFoundException
      */
-    public function activate($themeName)
+    public function activate(Theme $theme)
     {
-        $this->activeTheme = $this->getByThemeName($themeName);
+        $this->activeTheme = $theme;
     }
 
     /**
