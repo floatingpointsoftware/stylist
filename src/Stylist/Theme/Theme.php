@@ -14,6 +14,13 @@ class Theme
     private $path;
 
     /**
+     * Stores the json once decoded.
+     *
+     * @var stdClass
+     */
+    private $themeJson;
+
+    /**
      * Theme just needs to know one thing - where the theme is found. It'll do the rest.
      *
      * @param string $path Absolute path on the filesystem to the theme.
@@ -52,17 +59,15 @@ class Theme
      */
     public function getJson($attribute = null)
     {
-        static $themeJson = null;
-
-        if (is_null($themeJson)) {
-            $themeJson = new Json($this->getPath());
+        if (is_null($this->themeJson)) {
+            $this->themeJson = new Json($this->getPath());
         }
 
         if (!is_null($attribute)) {
-            return $themeJson->getJsonAttribute($attribute);
+            return $this->themeJson->getJsonAttribute($attribute);
         }
 
-        return $themeJson->getJson();
+        return $this->themeJson->getJson();
     }
 
     /**
@@ -74,7 +79,7 @@ class Theme
     public function __call($method, $arguments = [])
     {
         if (substr($method, 0, 3) == 'get') {
-            $attribute = strtolower($arguments[0]);
+            $attribute = strtolower(substr($method, 3));
 
             return $this->getJson($attribute);
         }

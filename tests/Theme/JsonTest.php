@@ -36,7 +36,7 @@ class JsonTest extends \Tests\TestCase
     public function testThemeFileMissing()
     {
         $json = new Json('path/that/doesnt/exist');
-        
+
         $json->getJson();
     }
 }
