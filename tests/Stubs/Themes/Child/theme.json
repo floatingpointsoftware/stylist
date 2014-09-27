@@ -1,0 +1,5 @@
+{
+	"name": "Child theme",
+	"description": "This is a child theme.",
+	"parent": "Parent theme"
+}

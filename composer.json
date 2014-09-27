@@ -20,13 +20,9 @@
         "mockery/mockery": "dev-master@dev",
         "orchestra/testbench": "3.0.*",
         "phpunit/phpunit": "4.2.*",
-        "apigen/apigen": "2.8.1",
         "barryvdh/laravel-ide-helper": "1.11.*"
     },
     "autoload": {
-        "classmap": [
-            "src/migrations"
-        ],
         "psr-4": {
             "FloatingPoint\\Stylist\\": "src/Stylist",
             "Tests\\": "tests"

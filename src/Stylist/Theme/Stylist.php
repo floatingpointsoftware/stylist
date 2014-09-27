@@ -2,6 +2,8 @@
 
 namespace FloatingPoint\Stylist\Theme;
 
+use FloatingPoint\Stylist\Theme\Exceptions\ThemeNotFoundException;
+
 class Stylist
 {
     /**
@@ -70,7 +72,7 @@ class Stylist
      * returns the theme locations found.
      *
      * @param $directory
-     * @return array
+     * @return array Returns an array of theme directory locations
      */
     public function discover($directory)
     {

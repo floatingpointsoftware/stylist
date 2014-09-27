@@ -2,6 +2,9 @@
 
 namespace FloatingPoint\Stylist\Theme;
 
+use File;
+use FloatingPoint\Stylist\Theme\Exceptions\ThemeJsonNotFoundException;
+
 class Json
 {
     /**
@@ -34,9 +37,13 @@ class Json
     public function getJson()
     {
         if (!$this->json) {
-            $json = File::get($this->themePath.'/theme.json');
+            $themeJsonPath = $this->themePath.'/theme.json';
 
-            $this->json = json_decode($json);
+            if (!File::exists($themeJsonPath)) {
+                throw new ThemeJsonNotFoundException($this->themePath);
+            }
+
+            $this->json = json_decode(File::get($themeJsonPath));
         }
 
         return $this->json;
@@ -52,8 +59,8 @@ class Json
     {
         $json = $this->getJson();
 
-        if (isset($json[$attribute])) {
-            return $json[$attribute];
+        if (isset($json->$attribute)) {
+            return $json->$attribute;
         }
 
         return null;

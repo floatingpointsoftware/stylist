@@ -2,6 +2,7 @@
 
 namespace FloatingPoint\Stylist;
 
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 
 class StylistServiceProvider extends ServiceProvider

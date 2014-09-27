@@ -1,6 +1,6 @@
 <?php
 
-namespace FloatingPoint\Stylist\Theme;
+namespace FloatingPoint\Stylist\Theme\Exceptions;
 
 class ThemeNotFoundException extends \Exception
 {
