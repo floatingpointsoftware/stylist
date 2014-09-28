@@ -46,4 +46,12 @@ class StylistTest extends TestCase
 
         $this->assertEquals($theme, $stylist->get('name'));
     }
+
+    /**
+     * @expectedException FloatingPoint\Stylist\Theme\Exceptions\ThemeNotFoundException
+     */
+    public function testInvalidTheme()
+    {
+        $this->stylist->get('invalidtheme');
+    }
 }
