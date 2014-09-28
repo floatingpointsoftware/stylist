@@ -35,10 +35,10 @@ class Loader
     /**
      * Creates a new theme instance based on the cache object provided.
      *
-     * @param object $cache
+     * @param stdClass $cache
      * @return Theme
      */
-    public function fromCache($cache)
+    public function fromCache(\stdClass $cache)
     {
         return new Theme(
             $cache->name,
