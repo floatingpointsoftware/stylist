@@ -95,13 +95,23 @@ class Stylist
     }
 
     /**
+     * Returns the currently active theme.
+     *
+     * @return Theme
+     */
+    public function current()
+    {
+        return $this->activeTheme;
+    }
+
+    /**
      * Retrieves a theme based on its name. If no theme is found it'll throw a ThemeNotFoundException.
      *
      * @param string $themeName
      * @return Theme
      * @throws ThemeNotFoundException
      */
-    public function find($themeName)
+    public function get($themeName)
     {
         foreach ($this->themes as $theme) {
             if ($theme->getName() == $themeName) {
@@ -124,16 +134,18 @@ class Stylist
     public function discover($directory)
     {
         $themeLocations = [];
-
         $files = scandir($directory);
 
         foreach ($files as $file) {
-            if (is_dir($file)) {
-                $this->discover($directory);
+            $location = "$directory/$file";
+
+            if (!in_array($file, ['.', '..']) && is_dir($location)) {
+                $themeLocations[] = $this->discover($location);
             }
 
             if ($file == 'theme.json') {
                 $themeLocations[] = $directory;
+                break;
             }
         }
 
