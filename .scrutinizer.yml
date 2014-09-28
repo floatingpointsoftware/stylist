@@ -35,7 +35,7 @@ checks:
         avoid_superglobals: true
         avoid_usage_of_logical_operators: true
         blank_line_after_namespace_declaration: true
-        encourage_shallow_comparison: true
+        encourage_shallow_comparison: false
         ensure_lower_case_builtin_functions: true
         fix_doc_comments: true
         fix_identation_4spaces: true
