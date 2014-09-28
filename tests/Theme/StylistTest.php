@@ -9,42 +9,46 @@ use Tests\TestCase;
 
 class StylistTest extends TestCase
 {
-    private $stylist;
-
-	public function setUp()
-    {
-        parent::setUp();
-
-        $this->stylist = new Stylist(new Loader);
-    }
-
     public function testThemeRegistration()
     {
+        $stylist = new Stylist(new Loader);
         $theme = new Theme('n', 'd', 'path', 'p');
 
-        $this->stylist->register($theme, true);
+        $stylist->register($theme, true);
 
-        $this->assertEquals($this->stylist->get('n'), $theme);
-        $this->assertEquals($this->stylist->current(), $theme);
+        $this->assertEquals($stylist->get('n'), $theme);
+        $this->assertEquals($stylist->current(), $theme);
     }
 
     public function testThemeDiscovery()
     {
-        $themes = $this->stylist->discover(__DIR__.'/../Stubs');
+        $stylist = new Stylist(new Loader);
+        $themes = $stylist->discover(__DIR__.'/../Stubs');
 
         $this->assertCount(2, $themes);
     }
 
     public function testCacheManagement()
     {
+        $stylist = new Stylist(new Loader);
         $theme = new Theme('name', 'desc', 'path');
 
-        $this->stylist->cache([$theme]);
+        $stylist->cache([$theme]);
 
+        // To test cache, we setup a new stylist instance
         $stylist = new Stylist(new Loader);
         $stylist->setupFromCache();
 
         $this->assertEquals($theme, $stylist->get('name'));
+    }
+
+    public function testPathRegistration()
+    {
+        $stylist = new Stylist(new Loader);
+
+        $stylist->registerPath(__DIR__.'/../Stubs/Themes/Parent');
+
+        $this->assertEquals('Parent theme', $stylist->get('Parent theme')->getName());
     }
 
     /**
@@ -52,6 +56,7 @@ class StylistTest extends TestCase
      */
     public function testInvalidTheme()
     {
-        $this->stylist->get('invalidtheme');
+        $stylist = new Stylist(new Loader);
+        $stylist->get('invalidtheme');
     }
 }
