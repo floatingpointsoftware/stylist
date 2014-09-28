@@ -114,7 +114,7 @@ class Stylist
     public function get($themeName)
     {
         foreach ($this->themes as $theme) {
-            if ($theme->getName() == $themeName) {
+            if ($theme->getName() === $themeName) {
                 return $theme;
             }
         }
@@ -139,7 +139,7 @@ class Stylist
         foreach ($files as $file) {
             $location = "$directory/$file";
 
-            if (!in_array($file, ['.', '..']) && is_dir($location)) {
+            if (false === in_array($file, ['.', '..']) && is_dir($location)) {
                 $themeLocations[] = $this->discover($location);
             }
 

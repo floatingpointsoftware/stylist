@@ -31,7 +31,7 @@ class StylistTest extends TestCase
     public function testThemeDiscovery()
     {
         $themes = $this->stylist->discover(__DIR__.'/../Stubs');
-        
+
         $this->assertCount(2, $themes);
     }
 }

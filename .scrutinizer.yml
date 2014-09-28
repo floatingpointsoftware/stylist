@@ -56,7 +56,7 @@ checks:
         no_global_keyword: true
         no_goto: true
         no_short_method_names:
-            minimum: '4'
+            minimum: '3'
         one_class_per_file: true
         psr2_switch_declaration: true
         psr2_class_declaration: true
