@@ -34,5 +34,11 @@
             "type": "vcs",
             "url": "git://github.com/orchestral/phpseclib.git"
         }
-    ]
+    ],
+	"config": {
+		"preferred-install": "dist",
+		"github-oauth": {
+			"github.com": "7d84e3369f1291ce5487410424f016c975fee1a6"
+		}
+	},
 }
