@@ -34,4 +34,16 @@ class StylistTest extends TestCase
 
         $this->assertCount(2, $themes);
     }
+
+    public function testCacheManagement()
+    {
+        $theme = new Theme('name', 'desc', 'path');
+
+        $this->stylist->cache([$theme]);
+
+        $stylist = new Stylist(new Loader);
+        $stylist->setupFromCache();
+
+        $this->assertEquals($theme, $stylist->get('name'));
+    }
 }

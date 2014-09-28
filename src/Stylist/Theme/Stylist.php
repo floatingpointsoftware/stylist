@@ -164,7 +164,7 @@ class Stylist
         $cacheJson = [];
 
         foreach ($themes as $theme) {
-            $cacheJson[$theme->getName()] = $theme->toArray();
+            $cacheJson[] = $theme->toArray();
         }
 
         Cache::forever($this->cacheKey, json_encode($cacheJson));
