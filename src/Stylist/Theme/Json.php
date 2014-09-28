@@ -19,7 +19,7 @@ class Json
      *
      * @var array
      */
-    private $json = [];
+    private $json;
 
     /**
      * @param Theme $theme
