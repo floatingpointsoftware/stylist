@@ -5,6 +5,8 @@ build:
 filter:
     paths:
         - 'src/Stylist/*'
+    excluded_paths:
+        - 'src/Stylist/StylistServiceProvider.php'
 
 checks:
     php:
