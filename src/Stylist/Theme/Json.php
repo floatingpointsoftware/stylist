@@ -16,8 +16,6 @@ class Json
 
     /**
      * Stores the json-decoded file as an array.
-     *
-     * @var stdClass
      */
     private $json;
 
