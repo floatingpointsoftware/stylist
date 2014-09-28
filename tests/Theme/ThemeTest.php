@@ -11,31 +11,19 @@ class ThemeTest extends TestCase
     {
         parent::setUp();
 
-        $this->theme = new Theme(__DIR__.'/../Stubs/Themes/Parent');
+        $this->theme = new Theme('name', 'description', 'path', 'parent');
     }
 
-    public function testGetPath()
+    public function testGetters()
     {
-        $this->assertSame(__DIR__.'/../Stubs/Themes/Parent', $this->theme->getPath());
+        $this->assertEquals('name', $this->theme->getName());
+        $this->assertEquals('description', $this->theme->getDescription());
+        $this->assertEquals('path', $this->theme->getPath());
+        $this->assertEquals('parent', $this->theme->getParent());
     }
 
-    public function testHasParentAsParent()
+    public function testParentCheck()
     {
-        $this->assertFalse($this->theme->hasParent());
-    }
-
-    public function testHasParentAsChild()
-    {
-        $theme = new Theme(__DIR__.'/../Stubs/Themes/Child');
-
-        $this->assertTrue($theme->hasParent());
-    }
-
-    /**
-     * @expectedException \Exception
-     */
-    public function testCallingAnInvalidJMethod()
-    {
-        $this->theme->gesInvalid();
+        $this->assertTrue($this->theme->hasParent());
     }
 }

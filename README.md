@@ -24,7 +24,7 @@ You're now ready to go!
 
 In order for Stylist to start using themes, you must register at least one theme with the package, and activate it.
 
-    Stylist::register('/absolute/path/to/theme', true);
+    Stylist::registerPath('/absolute/path/to/theme', true);
 
 Your theme should contain a theme.json file, which contains some basic information:
 

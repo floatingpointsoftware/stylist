@@ -3,37 +3,79 @@
 namespace FloatingPoint\Stylist\Theme;
 
 use File;
+use Illuminate\Contracts\Support\Arrayable;
 
-class Theme
+/**
+ * Class Theme
+ *
+ * Theme objects are just dumb little DTOs, used as a reference point for collecting information
+ * about themes, namely their name, description and parent details.
+ *
+ * @package FloatingPoint\Stylist\Theme
+ */
+class Theme implements Arrayable
 {
     /**
-     * Stores the path to the theme location.
-     *
-     * @var
+     * @var string
      */
-    private $path;
+    private $name;
 
     /**
-     * Stores the json once decoded.
-     *
-     * @var stdClass
+     * @var string
      */
-    private $themeJson;
+    private $description;
+
+    /**
+     * @var null|string
+     */
+    private $parent;
+
+    /**
+     * Absolute path of where the theme can be found on the disk.
+     *
+     * @var string
+     */
+    private $path;
 
     /**
      * Theme just needs to know one thing - where the theme is found. It'll do the rest.
      *
      * @param string $path Absolute path on the filesystem to the theme.
      */
-    public function __construct($path)
+    public function __construct($name, $description, $path, $parent = null)
     {
+        $this->name = $name;
+        $this->description = $description;
+        $this->parent = $parent;
         $this->path = $path;
     }
 
     /**
-     * Return the path to the theme.
-     *
-     * @return mixed
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @return string
      */
     public function getPath()
     {
@@ -47,43 +89,16 @@ class Theme
      */
     public function hasParent()
     {
-        return !!$this->getParent();
+        return !!$this->parent;
     }
 
     /**
-     * Returns the JSON for a theme, or if the attribute parameter is provided, returns the value
-     * for that specific attribute within the theme.json file.
+     * Returns the theme object as an array, containing all theme information.
      *
-     * @param string $attribute
-     * @return array|mixed
+     * @return array
      */
-    public function getJson($attribute = null)
+    public function toArray()
     {
-        if (is_null($this->themeJson)) {
-            $this->themeJson = new Json($this->getPath());
-        }
-
-        if (!is_null($attribute)) {
-            return $this->themeJson->getJsonAttribute($attribute);
-        }
-
-        return $this->themeJson->getJson();
-    }
-
-    /**
-     * A lovely magic method for handling specific JSON attribute calls.
-     *
-     * @param $params
-     * @throws \Exception
-     */
-    public function __call($method, $arguments = [])
-    {
-        if (substr($method, 0, 3) == 'get') {
-            $attribute = strtolower(substr($method, 3));
-
-            return $this->getJson($attribute);
-        }
-
-        throw new \Exception('Tried to call unknown method '.get_class($this).'::'.$method);
+        return get_object_vars($this);
     }
 }
