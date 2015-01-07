@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Theme;
 
 use FloatingPoint\Stylist\Theme\Theme;
@@ -7,10 +6,8 @@ use Tests\TestCase;
 
 class ThemeTest extends TestCase
 {
-	public function setUp()
+	public function init()
     {
-        parent::setUp();
-
         $this->theme = new Theme('name', 'description', 'path', 'parent');
     }
 

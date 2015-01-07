@@ -172,19 +172,40 @@ class Stylist
     }
 
     /**
+     * Clear any cache stylist may currently be using for configuration.
+     *
+     * @return void
+     */
+    public function clearCache()
+    {
+        Cache::forget($this->cacheKey);
+    }
+
+    /**
      * Sets up stylist to use themes from the cache. Stylist uses Laravel's own caching
      * mechanisms, so this could be stored on the disk, in memcache or elsewhere.
      */
     public function setupFromCache()
     {
-        if (Cache::has($this->cacheKey)) {
-            $this->themes = [];
-
-            $cachedThemes = json_decode(Cache::get($this->cacheKey));
-
-            foreach ($cachedThemes as $cachedTheme) {
-                $this->themes[] = $this->themeLoader->fromCache($cachedTheme);
-            }
+        if (!Cache::has($this->cacheKey)) {
+            return;
         }
+
+        $this->themes = [];
+        $cachedThemes = json_decode(Cache::get($this->cacheKey));
+
+        foreach ($cachedThemes as $cachedTheme) {
+            $this->themes[] = $this->themeLoader->fromCache($cachedTheme);
+        }
+    }
+
+    /**
+     * Return the key used for cache storage.
+     *
+     * @return string
+     */
+    public function cacheKey()
+    {
+        return $this->cacheKey;
     }
 }

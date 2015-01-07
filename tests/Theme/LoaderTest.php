@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Theme;
 
 use FloatingPoint\Stylist\Theme\Loader;
@@ -9,10 +8,8 @@ class LoaderTest extends TestCase
 {
     private $loader;
 
-	public function setUp()
+	public function init()
     {
-        parent::setUp();
-
         $this->loader = new Loader();
     }
 

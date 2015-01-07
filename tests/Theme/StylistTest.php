@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Theme;
 
 use FloatingPoint\Stylist\Theme\Loader;

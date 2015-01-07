@@ -1,6 +1,8 @@
 <?php
 namespace FloatingPoint\Stylist;
 
+use Cache;
+use Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 
@@ -21,6 +23,12 @@ class StylistServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $cacheKey = \Stylist::cacheKey();
+
+        if (\Cache::has($cacheKey)) {
+            return \Stylist::setupFromCache();
+        }
+
         $paths = \Config::get('stylist::paths', []);
 
         foreach ($paths as $path) {

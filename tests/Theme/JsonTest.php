@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Theme;
 
 use FloatingPoint\Stylist\Theme\Json;
@@ -8,10 +7,8 @@ class JsonTest extends \Tests\TestCase
 {
     private $themeJson;
 
-    public function setUp()
+    public function init()
     {
-        parent::setUp();
-
         $this->themeJson = new Json(__DIR__.'/../Stubs/Themes/Parent');
     }
 
