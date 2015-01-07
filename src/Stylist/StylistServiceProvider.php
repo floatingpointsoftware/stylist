@@ -1,5 +1,4 @@
 <?php
-
 namespace FloatingPoint\Stylist;
 
 use Illuminate\Support\ServiceProvider;
@@ -7,16 +6,6 @@ use Illuminate\Foundation\AliasLoader;
 
 class StylistServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the application events.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this->package('floatingpoint/stylist');
-    }
-
     /**
      * Registers the various bindings required by other packages.
      */

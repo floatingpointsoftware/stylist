@@ -72,13 +72,14 @@ class Stylist
     /**
      * Register a theme with Stylist based on its path.
      *
-     * @param $path
+     * @param string $path
+     * @param boolean $activate
      */
-    public function registerPath($path)
+    public function registerPath($path, $activate = false)
     {
         $theme = $this->themeLoader->fromPath($path);
 
-        $this->register($theme);
+        $this->register($theme, $activate);
     }
 
     /**

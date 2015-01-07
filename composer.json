@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "mockery/mockery": "dev-master@dev",
-        "orchestra/testbench": "3.0.*",
+        "orchestra/testbench": "3.0.*@dev",
         "phpunit/phpunit": "4.2.*",
         "barryvdh/laravel-ide-helper": "1.11.*"
     },
