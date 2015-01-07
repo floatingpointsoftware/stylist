@@ -62,11 +62,11 @@ This same approach is applied to your styles, js and any other static assets.
 
 In order for this approach to work, Stylist registers specific routes and manages those requests. It registers the following routes:
 
-    /assets/*
+    /assets/theme/*
 
 This means that when you make a call to say, Asset::image, the output url in your HTML will actually look like the following:
 
-    /assets/images/path/to/image.png
+    /assets/theme/images/path/to/image.png
 
 If you do actually want custom images, stylesheets.etc - the Asset manager that ships with Stylist can handle that as well, via magic method calls. Let's say for example that you REALLY want your stylesheets to be loaded via /css/ instead (we don't encourage this, but you can do it), then do the following:
 
@@ -74,7 +74,7 @@ If you do actually want custom images, stylesheets.etc - the Asset manager that 
 
 This will then produce the following url:
 
-    /assets/css/stylesheet.css
+    /assets/theme/css/stylesheet.css
 
 and be loaded from your theme as you'd expect (inside /public/css).
 
