@@ -59,7 +59,6 @@ class StylistTest extends TestCase
 
         $this->assertEquals('Parent theme', $stylist->get('Parent theme')->getName());
         $this->assertEquals('Child theme', $stylist->get('Child theme')->getName());
-
     }
 
     /**
