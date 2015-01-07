@@ -77,7 +77,8 @@ class Stylist
      */
     public function registerPath($path, $activate = false)
     {
-        $theme = $this->themeLoader->fromPath($path);
+        $realPath = realpath($path);
+        $theme = $this->themeLoader->fromPath($realPath);
 
         $this->register($theme, $activate);
     }
@@ -146,23 +147,28 @@ class Stylist
      */
     public function discover($directory)
     {
-        $themeLocations = [];
-        $files = scandir($directory);
+        $searchString = $directory.'/theme.json';
 
-        foreach ($files as $file) {
-            $location = "$directory/$file";
+        $files = str_replace('theme.json', '', $this->rglob($searchString));
 
-            if ($file == 'theme.json') {
-                $themeLocations[] = $directory;
-                break;
-            }
+        return $files;
+    }
 
-            if (false === in_array($file, ['.', '..']) && is_dir($location)) {
-                $themeLocations[] = $this->discover($location);
-            }
+    /**
+     * Will glob recursively for a files specified within the pattern.
+     *
+     * @param string $pattern
+     * @param int $flags
+     * @return array
+     */
+    protected function rglob($pattern, $flags = 0) {
+        $files = glob($pattern, $flags);
+
+        foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
+            $files = array_merge($files, $this->rglob($dir.'/'.basename($pattern), $flags));
         }
 
-        return array_flatten($themeLocations);
+        return $files;
     }
 
     /**

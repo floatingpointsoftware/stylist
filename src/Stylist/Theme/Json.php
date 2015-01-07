@@ -34,17 +34,17 @@ class Json
      */
     public function getJson()
     {
-        if (!$this->json) {
-            $themeJsonPath = $this->themePath.'/theme.json';
-
-            if (!File::exists($themeJsonPath)) {
-                throw new ThemeJsonNotFoundException($this->themePath);
-            }
-
-            $this->json = json_decode(File::get($themeJsonPath));
+        if ($this->json) {
+            return $this->json;
         }
 
-        return $this->json;
+        $themeJsonPath = $this->themePath.'/theme.json';
+
+        if (!File::exists($themeJsonPath)) {
+            throw new ThemeJsonNotFoundException($this->themePath);
+        }
+
+        return $this->json = json_decode(File::get($themeJsonPath));
     }
 
     /**
