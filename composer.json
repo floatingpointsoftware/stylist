@@ -1,5 +1,5 @@
 {
-    "name": "floatingpointsoftware/stylist",
+    "name": "floatingpoint/stylist",
     "description": "Laravel 4 theming package.",
     "authors": [
         {
@@ -13,8 +13,8 @@
     ],
     "require": {
         "php": ">=5.5.0",
-        "illuminate/html": "~5.0",
-        "illuminate/support": "5.0.*"
+        "illuminate/html": "~5",
+        "illuminate/support": "~5"
     },
     "require-dev": {
         "mockery/mockery": "dev-master@dev",
