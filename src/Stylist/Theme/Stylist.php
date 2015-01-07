@@ -83,6 +83,18 @@ class Stylist
     }
 
     /**
+     * Register a number of themes based on the array of paths provided.
+     *
+     * @param array $paths
+     */
+    public function registerPaths(array $paths)
+    {
+        foreach ($paths as $path) {
+            $this->registerPath($path);
+        }
+    }
+
+    /**
      * Activate a theme by its name.
      *
      * @param Theme $theme
@@ -140,13 +152,13 @@ class Stylist
         foreach ($files as $file) {
             $location = "$directory/$file";
 
-            if (false === in_array($file, ['.', '..']) && is_dir($location)) {
-                $themeLocations[] = $this->discover($location);
-            }
-
             if ($file == 'theme.json') {
                 $themeLocations[] = $directory;
                 break;
+            }
+
+            if (false === in_array($file, ['.', '..']) && is_dir($location)) {
+                $themeLocations[] = $this->discover($location);
             }
         }
 

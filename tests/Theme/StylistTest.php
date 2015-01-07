@@ -50,6 +50,18 @@ class StylistTest extends TestCase
         $this->assertEquals('Parent theme', $stylist->get('Parent theme')->getName());
     }
 
+    public function testMultiplePathRegistrations()
+    {
+        $stylist = new Stylist(new Loader);
+        $paths = $stylist->discover(__DIR__.'/../Stubs');
+
+        $stylist->registerPaths($paths);
+
+        $this->assertEquals('Parent theme', $stylist->get('Parent theme')->getName());
+        $this->assertEquals('Child theme', $stylist->get('Child theme')->getName());
+
+    }
+
     /**
      * @expectedException FloatingPoint\Stylist\Theme\Exceptions\ThemeNotFoundException
      */
