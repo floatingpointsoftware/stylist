@@ -2,9 +2,8 @@
 namespace Tests\Theme;
 
 use FloatingPoint\Stylist\Theme\Theme;
-use Tests\TestCase;
 
-class ThemeTest extends TestCase
+class ThemeTest extends \Tests\TestCase
 {
 	public function init()
     {

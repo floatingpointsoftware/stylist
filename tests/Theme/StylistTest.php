@@ -4,9 +4,8 @@ namespace Tests\Theme;
 use FloatingPoint\Stylist\Theme\Loader;
 use FloatingPoint\Stylist\Theme\Stylist;
 use FloatingPoint\Stylist\Theme\Theme;
-use Tests\TestCase;
 
-class StylistTest extends TestCase
+class StylistTest extends \Tests\TestCase
 {
     public function testThemeRegistration()
     {

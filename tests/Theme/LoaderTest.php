@@ -2,9 +2,8 @@
 namespace Tests\Theme;
 
 use FloatingPoint\Stylist\Theme\Loader;
-use Tests\TestCase;
 
-class LoaderTest extends TestCase
+class LoaderTest extends \Tests\TestCase
 {
     private $loader;
 
