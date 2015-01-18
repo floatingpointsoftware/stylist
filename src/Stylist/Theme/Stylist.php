@@ -134,7 +134,7 @@ class Stylist
             $this->activateFinderPaths($this->get($theme->getParent()));
         }
 
-        $this->view->addLocation($theme->getPath());
+        $this->view->addLocation($theme->getPath().'/views/');
     }
 
     /**
