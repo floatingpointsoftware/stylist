@@ -18,33 +18,6 @@ class StylistServiceProvider extends ServiceProvider
     }
 
     /**
-     * If certain configuration values are available and valid, Stylist will initially
-     * try to discover and activate the required theme.
-     */
-    public function boot()
-    {
-        $cacheKey = \Stylist::cacheKey();
-
-        if (\Cache::has($cacheKey)) {
-            return \Stylist::setupFromCache();
-        }
-
-        $paths = \Config::get('stylist::paths', []);
-
-        foreach ($paths as $path) {
-            \Stylist::discover($path);
-        }
-
-        $desiredTheme = Config::get('stylist::activate', null);
-
-        if (!is_null($desiredTheme)) {
-            $theme = \Stylist::get($desiredTheme);
-
-            \Stylist::activate($theme);
-        }
-    }
-
-    /**
      * Sets up the object that will be used for theme registration calls.
      */
     private function registerStylist()

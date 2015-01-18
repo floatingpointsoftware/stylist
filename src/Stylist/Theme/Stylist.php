@@ -4,6 +4,7 @@ namespace FloatingPoint\Stylist\Theme;
 
 use Cache;
 use FloatingPoint\Stylist\Theme\Exceptions\ThemeNotFoundException;
+use Illuminate\Container\Container;
 use Log;
 
 /**
@@ -46,11 +47,23 @@ class Stylist
     private $themeLoader;
 
     /**
+     * @var Container
+     */
+    private $app;
+
+    /**
+     * @var ViewFinderInterface
+     */
+    private $view;
+
+    /**
      * @param Loader $themeLoader
      */
-    public function __construct(Loader $themeLoader)
+    public function __construct(Loader $themeLoader, Container $app)
     {
         $this->themeLoader = $themeLoader;
+        $this->app = $app;
+        $this->view = $this->app->make('view');
     }
 
     /**
@@ -96,7 +109,7 @@ class Stylist
     }
 
     /**
-     * Activate a theme by its name.
+     * Activate a theme.
      *
      * @param Theme $theme
      * @throws ThemeNotFoundException
@@ -105,7 +118,23 @@ class Stylist
     {
         $this->activeTheme = $theme;
 
+        $this->activateFinderPaths($theme);
+
         Log::info("Using theme [{$theme->getName()}]");
+    }
+
+    /**
+     * Activates the view finder paths for a theme and its parents.
+     *
+     * @param Theme $theme
+     */
+    protected function activateFinderPaths(Theme $theme)
+    {
+        if ($theme->hasParent()) {
+            $this->activateFinderPaths($this->get($theme->getParent()));
+        }
+
+        $this->view->addLocation($theme->getPath());
     }
 
     /**
@@ -134,6 +163,16 @@ class Stylist
         }
 
         throw new ThemeNotFoundException($themeName);
+    }
+
+    /**
+     * Returns an array of themes that have been registered with Stylist.
+     *
+     * @return array
+     */
+    public function themes()
+    {
+        return $this->themes;
     }
 
     /**
