@@ -39,7 +39,10 @@ So, what happens when you now load views?
 
 ## How Stylist works
 
-Everytime you register a new theme and activate it, Stylist then becomes aware of a new location to search for views, stylesheets, javascripts and image files. Stylist has a few opinions of how to structure your theme directories as well. The reason for this is so that every theme follows the same approach. For example, when you point Stylist to your theme directory, it should have the following directories (if it needs them):
+Everytime you register a new theme and activate it, Stylist then becomes aware of a new location to search for views, stylesheets, 
+javascripts and image files. Stylist has a few opinions of how to structure your theme directories as well. The reason for this is 
+so that every theme follows the same approach. For example, when you point Stylist to your theme directory, it should have the 
+following directories (if it needs them):
 
     /public/stylesheets
     /public/javascripts
@@ -52,31 +55,25 @@ Then, when you make calls like the following:
 
 It'll look in your theme's directory: /views/layout/ for application.blade.php. Simple huh?
 
-When dealing with assets, you can use Stylist's own Asset management library:
+When dealing with assets, you can use the usual Illuminate\Html library:
 
-    {{ Asset::image('path/to/image.png') }}
+    {{ HTML::image('path/to/image.png') }}
 
-This will look for the image in your theme's directory first and foremost: /public/images/path/to/image.png
+This will look for the image in your theme's directory first and foremost: /public/themes/active-theme/images/path/to/image.png
 
 This same approach is applied to your styles, js and any other static assets.
 
-In order for this approach to work, Stylist registers specific routes and manages those requests. It registers the following routes:
+In order for this approach to work, you need to register Stylist's own HtmlServiceProvider which ensures that Stylist's html class is 
+loaded when looking for these assets on your host. You can do this by simply adding the HtmlServiceProvider in config/app.php:
 
-    /assets/theme/*
+    'FloatingPoint\Stylist\Html\HtmlServiceProvider'
 
 This means that when you make a call to say, Asset::image, the output url in your HTML will actually look like the following:
 
-    /assets/theme/images/path/to/image.png
+    /themes/active-theme/images/path/to/image.png
 
-If you do actually want custom images, stylesheets.etc - the Asset manager that ships with Stylist can handle that as well, via magic method calls. Let's say for example that you REALLY want your stylesheets to be loaded via /css/ instead (we don't encourage this, but you can do it), then do the following:
-
-    Asset::css('stylesheet.css')
-
-This will then produce the following url:
-
-    /assets/theme/css/stylesheet.css
-
-and be loaded from your theme as you'd expect (inside /public/css).
+Of course, you don't need to add the service provider for the HTML management if you don't need it, or if you don't want Stylist 
+to manage that for you.
 
 ## Theme inheritance
 
