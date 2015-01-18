@@ -36,7 +36,7 @@ class StylistServiceProvider extends ServiceProvider
 
     private function setupUrlGenerator()
     {
-        AliasLoader::getInstance()->alias('Illuminate\Routing\UrlGenerator', 'FloatingPoint\Stylist\Assets\UrlGenerator');
+        AliasLoader::getInstance()->alias('Illuminate\Routing\UrlGenerator', 'FloatingPoint\Stylist\Theme\UrlGenerator');
     }
 
     /**

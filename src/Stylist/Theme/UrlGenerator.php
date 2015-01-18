@@ -28,7 +28,7 @@ class UrlGenerator extends \Illuminate\Routing\UrlGenerator
         $root = $this->getRootUrl($this->getScheme($secure));
 
         $theme = Stylist::current();
-        
+
         return $this->removeIndex($root).'/themes/'.$theme->getPath().'/'.trim($path, '/');
     }
 }
