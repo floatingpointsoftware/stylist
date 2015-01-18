@@ -109,15 +109,19 @@ class Stylist
     }
 
     /**
-     * Activate a theme.
+     * Activate a theme. Activation can be done by the theme's name, or via a Theme object.
      *
-     * @param Theme $theme
+     * @param string|Theme $theme
      * @throws ThemeNotFoundException
      */
-    public function activate(Theme $theme)
+    public function activate($theme)
     {
-        $this->activeTheme = $theme;
+        if (!$theme instanceof $theme) {
+            $theme = $this->get($theme);
+        }
 
+        $this->activeTheme = $theme;
+        
         $this->activateFinderPaths($theme);
 
         Log::info("Using theme [{$theme->getName()}]");
