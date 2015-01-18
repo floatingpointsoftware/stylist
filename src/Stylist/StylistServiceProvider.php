@@ -15,7 +15,6 @@ class StylistServiceProvider extends ServiceProvider
     {
         $this->registerAlias();
         $this->registerStylist();
-        $this->setupUrlGenerator();
     }
 
     /**
@@ -32,11 +31,6 @@ class StylistServiceProvider extends ServiceProvider
     private function registerAlias()
     {
         AliasLoader::getInstance()->alias('Stylist', 'FloatingPoint\Stylist\Facades\Stylist');
-    }
-
-    private function setupUrlGenerator()
-    {
-        AliasLoader::getInstance()->alias('Illuminate\Routing\UrlGenerator', 'FloatingPoint\Stylist\Theme\UrlGenerator');
     }
 
     /**

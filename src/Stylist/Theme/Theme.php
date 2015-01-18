@@ -1,9 +1,9 @@
 <?php
-
 namespace FloatingPoint\Stylist\Theme;
 
 use File;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Str;
 
 /**
  * Class Theme
@@ -90,6 +90,16 @@ class Theme implements Arrayable
     public function hasParent()
     {
         return !!$this->parent;
+    }
+
+    /**
+     * Return the asset path to the theme.
+     *
+     * @return string
+     */
+    public function getAssetPath()
+    {
+        return Str::slug($this->getName());
     }
 
     /**

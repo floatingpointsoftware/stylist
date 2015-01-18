@@ -25,7 +25,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            'FloatingPoint\Stylist\StylistServiceProvider'
+            'FloatingPoint\Stylist\StylistServiceProvider',
+            'FloatingPoint\Stylist\Html\HtmlServiceProvider',
         ];
     }
 }
