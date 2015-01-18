@@ -121,7 +121,7 @@ class Stylist
         }
 
         $this->activeTheme = $theme;
-        
+
         $this->activateFinderPaths($theme);
 
         Log::info("Using theme [{$theme->getName()}]");
