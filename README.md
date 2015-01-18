@@ -68,12 +68,24 @@ loaded when looking for these assets on your host. You can do this by simply add
 
     'FloatingPoint\Stylist\Html\HtmlServiceProvider'
 
-This means that when you make a call to say, Asset::image, the output url in your HTML will actually look like the following:
+This means that when you make a call to say, HTML::image, the output url in your HTML will actually look like the following:
 
     /themes/active-theme/images/path/to/image.png
 
 Of course, you don't need to add the service provider for the HTML management if you don't need it, or if you don't want Stylist 
 to manage that for you.
+
+There's one step we're still missing - and that's the publishing of your theme assets. This isn't a necessary step - you can easily 
+just copy your theme's assets from it's directory, into the appropriate directory in the public directory in Laravel 5. Or, you can 
+listen for the stylist.publishing event where you can return your theme's paths:
+
+    Event::listen('stylist.publishing', function() {
+        return Stylist::discover('/path/to/themes/dir');
+    });
+    
+You'll then have your theme's assets published to their associated directories. It's important to note that the returned array must
+contain array elements that point to the the THEME directory, not the theme's ASSETS directories. This is because stylist will try
+to work with the theme and its json file.
 
 ## Theme inheritance
 
