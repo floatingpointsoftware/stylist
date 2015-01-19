@@ -44,7 +44,7 @@ class PublishAssetsCommand extends Command
         $this->setupThemes();
         $this->copyAssets();
 
-        //$this->info('Assets published.');
+        $this->info('Assets published.');
     }
 
     /**
