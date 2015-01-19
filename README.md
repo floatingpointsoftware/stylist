@@ -55,25 +55,19 @@ Then, when you make calls like the following:
 
 It'll look in your theme's directory: /views/layout/ for application.blade.php. Simple huh?
 
-When dealing with assets, you can use the usual Illuminate\Html library:
+When dealing with assets, Stylist requires the Illuminate\Html library, but instead of using the HTML class, you use Stylist's Theme facade:
 
-    {{ HTML::image('path/to/image.png') }}
+    {{ Theme::image('path/to/image.png') }}
 
 This will look for the image in your theme's directory first and foremost: /public/themes/active-theme/images/path/to/image.png
 
-This same approach is applied to your styles, js and any other static assets.
+This same approach is applied to your styles, js and any other static assets. Whenever you wish to use theme assets, make sure you use the Theme class.
 
-In order for this approach to work, you need to register Stylist's own HtmlServiceProvider which ensures that Stylist's html class is 
-loaded when looking for these assets on your host. You can do this by simply adding the HtmlServiceProvider in config/app.php:
-
-    'FloatingPoint\Stylist\Html\HtmlServiceProvider'
-
-This means that when you make a call to say, HTML::image, the output url in your HTML will actually look like the following:
+This means that when you make a call to say, Theme::image, the output url in your HTML will actually look like the following:
 
     /themes/active-theme/images/path/to/image.png
 
-Of course, you don't need to add the service provider for the HTML management if you don't need it, or if you don't want Stylist 
-to manage that for you.
+Of course, if you don't want Stylist to manage that for you, simply use the usual HTML facade.
 
 There's one step we're still missing - and that's the publishing of your theme assets. This isn't a necessary step - you can easily 
 just copy your theme's assets from it's directory, into the appropriate directory in the public directory in Laravel 5. Or, you can 

@@ -1,19 +1,19 @@
 <?php
 namespace Tests\Html;
 
-use FloatingPoint\Stylist\Facades\Stylist;
+use FloatingPoint\Stylist\Facades\StylistFacade;
 use Tests\TestCase;
 
-class HtmlBuilderTest extends TestCase
+class ThemeBuilderTest extends TestCase
 {
     private $builder;
 
     public function init()
     {
-        $this->builder = $this->app->make('html');
+        $this->builder = $this->app->make('stylist.theme');
 
-        Stylist::registerPath(__DIR__.'/../Stubs/Themes/Parent');
-        Stylist::activate('Parent theme');
+        StylistFacade::registerPath(__DIR__.'/../Stubs/Themes/Parent');
+        StylistFacade::activate('Parent theme');
     }
 
     public function testScriptUrlCreation()

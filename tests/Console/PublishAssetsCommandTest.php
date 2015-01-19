@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Console;
 
-use FloatingPoint\Stylist\Facades\Stylist;
+use FloatingPoint\Stylist\Facades\StylistFacade;
 use Tests\TestCase;
 
 class PublishAssetsCommandTest extends TestCase
@@ -12,7 +12,7 @@ class PublishAssetsCommandTest extends TestCase
 
         // Setup our lisener that will discover our available themes and return the paths
         $this->app['events']->listen('stylist.publishing', function() {
-            return Stylist::discover(__DIR__.'/../Stubs/Themes');
+            return StylistFacade::discover(__DIR__.'/../Stubs/Themes');
         });
 
         $artisan = $this->app->make('Illuminate\Contracts\Console\Kernel');

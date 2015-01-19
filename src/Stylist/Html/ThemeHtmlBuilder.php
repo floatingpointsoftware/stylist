@@ -1,10 +1,31 @@
 <?php
 namespace FloatingPoint\Stylist\Html;
 
-use FloatingPoint\Stylist\Facades\Stylist;
+use FloatingPoint\Stylist\Facades\StylistFacade;
+use Illuminate\Html\HtmlBuilder;
+use Illuminate\Routing\UrlGenerator;
 
-class HtmlBuilder extends \Illuminate\Html\HtmlBuilder
+class ThemeHtmlBuilder
 {
+    /**
+     * @var HtmlBuilder
+     */
+    private $html;
+
+    /**
+     * @var UrlGenerator
+     */
+    private $url;
+
+    /**
+     * @param HtmlBuilder $html
+     */
+    public function __construct(HtmlBuilder $html, UrlGenerator $url)
+    {
+        $this->html = $html;
+        $this->url = $url;
+    }
+
     /**
      * Generate a link to a JavaScript file.
      *
@@ -15,7 +36,7 @@ class HtmlBuilder extends \Illuminate\Html\HtmlBuilder
      */
     public function script($url, $attributes = array(), $secure = null)
     {
-        return parent::script($this->assetUrl($url), $attributes, $secure);
+        return $this->html->script($this->assetUrl($url), $attributes, $secure);
     }
 
     /**
@@ -28,7 +49,7 @@ class HtmlBuilder extends \Illuminate\Html\HtmlBuilder
      */
     public function style($url, $attributes = array(), $secure = null)
     {
-        return parent::style($this->assetUrl($url), $attributes, $secure);
+        return $this->html->style($this->assetUrl($url), $attributes, $secure);
     }
 
     /**
@@ -42,7 +63,7 @@ class HtmlBuilder extends \Illuminate\Html\HtmlBuilder
      */
     public function image($url, $alt = null, $attributes = array(), $secure = null)
     {
-        return parent::image($this->assetUrl($url), $alt, $attributes, $secure);
+        return $this->html->image($this->assetUrl($url), $alt, $attributes, $secure);
     }
 
     /**
@@ -56,7 +77,7 @@ class HtmlBuilder extends \Illuminate\Html\HtmlBuilder
      */
     public function linkAsset($url, $title = null, $attributes = array(), $secure = null)
     {
-        return parent::linkAsset($this->assetUrl($url), $title, $attributes, $secure);
+        return $this->html->linkAsset($this->assetUrl($url), $title, $attributes, $secure);
     }
 
     /**
@@ -71,7 +92,7 @@ class HtmlBuilder extends \Illuminate\Html\HtmlBuilder
             return $url;
         }
 
-        $theme = Stylist::current();
+        $theme = StylistFacade::current();
 
         if ($theme) {
             $themePath = $theme->getAssetPath();

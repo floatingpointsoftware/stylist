@@ -4,18 +4,32 @@ namespace FloatingPoint\Stylist;
 use Cache;
 use Config;
 use FloatingPoint\Stylist\Console\PublishAssetsCommand;
-use Illuminate\Support\ServiceProvider;
+use FloatingPoint\Stylist\Html\ThemeHtmlBuilder;
+use Illuminate\Html\HtmlServiceProvider;
+use Illuminate\Support\AggregateServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 
-class StylistServiceProvider extends ServiceProvider
+class StylistServiceProvider extends AggregateServiceProvider
 {
+    /**
+     * Stylist provides the HtmlServiceProvider for ease-of-use.
+     *
+     * @var array
+     */
+    protected $providers = [
+        HtmlServiceProvider::class
+    ];
+
     /**
      * Registers the various bindings required by other packages.
      */
     public function register()
     {
-        $this->registerAlias();
+        parent::register();
+
+        $this->registerAliases();
         $this->registerStylist();
+        $this->registerThemeBuilder();
         $this->registerCommands();
     }
 
@@ -28,11 +42,25 @@ class StylistServiceProvider extends ServiceProvider
     }
 
     /**
+     * Create the binding necessary for the theme html builder.
+     */
+    protected function registerThemeBuilder()
+    {
+        $this->app->bindShared('stylist.theme', function($app)
+        {
+            return new ThemeHtmlBuilder($app['html'], $app['url']);
+        });
+    }
+
+    /**
      * Stylist class should be accessible from global scope for ease of use.
      */
-    private function registerAlias()
+    private function registerAliases()
     {
-        AliasLoader::getInstance()->alias('Stylist', 'FloatingPoint\Stylist\Facades\Stylist');
+        $aliasLoader = AliasLoader::getInstance();
+
+        $aliasLoader->alias('Stylist', 'FloatingPoint\Stylist\Facades\StylistFacade');
+        $aliasLoader->alias('Theme', 'FloatingPoint\Stylist\Facades\ThemeFacade');
     }
 
     /**
