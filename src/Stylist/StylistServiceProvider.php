@@ -3,6 +3,7 @@ namespace FloatingPoint\Stylist;
 
 use Cache;
 use Config;
+use FloatingPoint\Stylist\Console\PublishAssetsCommand;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 
@@ -15,6 +16,7 @@ class StylistServiceProvider extends ServiceProvider
     {
         $this->registerAlias();
         $this->registerStylist();
+        $this->registerCommands();
     }
 
     /**
@@ -31,6 +33,16 @@ class StylistServiceProvider extends ServiceProvider
     private function registerAlias()
     {
         AliasLoader::getInstance()->alias('Stylist', 'FloatingPoint\Stylist\Facades\Stylist');
+    }
+
+    /**
+     * Register the comamnds available to the package.
+     */
+    private function registerCommands()
+    {
+        $this->commands(
+            PublishAssetsCommand::class
+        );
     }
 
     /**

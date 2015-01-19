@@ -85,7 +85,7 @@ listen for the stylist.publishing event where you can return your theme's paths:
     
 You'll then have your theme's assets published to their associated directories. It's important to note that the returned array must
 contain array elements that point to the the THEME directory, not the theme's ASSETS directories. This is because stylist will try
-to work with the theme and its json file.
+to work with the theme and its json file, and publish the required files.
 
 ## Theme inheritance
 
