@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Console;
 
-use FloatingPoint\Stylist\Facades\StylistFacade;
+use Stylist;
 use Tests\TestCase;
 
 class PublishAssetsCommandTest extends TestCase
@@ -10,10 +10,7 @@ class PublishAssetsCommandTest extends TestCase
     {
         $this->app['files']->cleanDirectory(public_path());
 
-        // Setup our listener that will discover our available themes and return the paths
-        $this->app['events']->listen('stylist.publishing', function() {
-            return StylistFacade::discover(__DIR__.'/../Stubs/Themes');
-        });
+        Stylist::registerPaths(Stylist::discover(__DIR__.'/../Stubs/Themes'));
 
         $artisan = $this->app->make('Illuminate\Contracts\Console\Kernel');
 

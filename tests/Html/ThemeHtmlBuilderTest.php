@@ -4,7 +4,7 @@ namespace Tests\Html;
 use FloatingPoint\Stylist\Facades\StylistFacade;
 use Tests\TestCase;
 
-class ThemeBuilderTest extends TestCase
+class ThemeHtmlBuilderTest extends TestCase
 {
     private $builder;
     
@@ -46,8 +46,7 @@ class ThemeBuilderTest extends TestCase
 
     public function testAssetUrlResponse()
     {
-        $url = $this->builder->url();
-
-        $this->assertEquals('/themes/parent-theme/', $url);
+        $this->assertEquals('/themes/parent-theme/', $this->builder->url());
+        $this->assertEquals('/themes/parent-theme/favicon.ico', $this->builder->url('favicon.ico'));
     }
 }

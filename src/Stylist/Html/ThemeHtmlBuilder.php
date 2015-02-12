@@ -84,11 +84,12 @@ class ThemeHtmlBuilder
      * Returns the theme's public URI location. This is not a full URL. If you wish
      * for a full URL, simply add the site's URL configuration to this path.
      *
+     * @param string $file
      * @return string
      */
-    public function url()
+    public function url($file = '')
     {
-        return '/'.$this->assetUrl('');
+        return '/'.$this->assetUrl($file);
     }
 
     /**

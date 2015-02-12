@@ -1,7 +1,7 @@
 <?php
 namespace FloatingPoint\Stylist\Console;
 
-use FloatingPoint\Stylist\Facades\StylistFacade;
+use Stylist;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Container\Container;
 
@@ -53,12 +53,15 @@ class PublishAssetsCommand extends Command
      */
     protected function setupThemes()
     {
-        $eventPaths = $this->app['events']->fire('stylist.publishing');
-        $themePaths = array_flatten($eventPaths);
+        $this->app['events']->fire('stylist.publishing');
 
-        foreach ($themePaths as $path) {
+        $themes = Stylist::themes();
+
+        foreach ($themes as $theme) {
+            $path = $theme->getPath();
+
             if ($this->app['files']->exists($path.'assets/')) {
-                StylistFacade::registerPath($path);
+                Stylist::registerPath($path);
             }
         }
     }
@@ -68,7 +71,7 @@ class PublishAssetsCommand extends Command
      */
     protected function copyAssets()
     {
-        $themes = StylistFacade::themes();
+        $themes = Stylist::themes();
 
         foreach ($themes as $theme) {
             $themePath = public_path('themes/' . $theme->getAssetPath());

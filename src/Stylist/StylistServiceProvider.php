@@ -56,11 +56,12 @@ class StylistServiceProvider extends AggregateServiceProvider
         $paths = $this->app['config']->get('stylist.paths', []);
 
         foreach ($paths as $path) {
-            Stylist::discover($path);
+            $themePaths = Stylist::discover($path);
+            Stylist::registerPaths($themePaths);
         }
 
         $theme = $this->app['config']->get('stylist.activate', null);
-        
+
         if (!is_null($theme)) {
             Stylist::activate($theme);
         }

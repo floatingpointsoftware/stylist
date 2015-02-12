@@ -70,12 +70,13 @@ This means that when you make a call to say, Theme::image, the output url in you
 Of course, if you don't want Stylist to manage that for you, simply use the usual HTML facade.
 
 There's one step we're still missing - and that's the publishing of your theme assets. This isn't a necessary step - you can easily 
-just copy your theme's assets from it's directory, into the appropriate directory in the public directory in Laravel 5. Or, you can 
-listen for the stylist.publishing event where you can return your theme's paths:
+just copy your theme's assets from it's directory, into the appropriate directory in the public directory in Laravel 5. You simply
+need to ensure that before you publish, your themes are available and registered. Service providers are a great place to do this.
 
-    Event::listen('stylist.publishing', function() {
-        return Stylist::discover('/path/to/themes/dir');
-    });
+    public function register()
+    {
+        Stylist::registerPaths(Stylist::discover('/path/to/my/themes'));    
+    }
     
 You'll then have your theme's assets published to their associated directories. It's important to note that the returned array must
 contain array elements that point to the the THEME directory, not the theme's ASSETS directories. This is because stylist will try
@@ -111,4 +112,7 @@ Stylist has a few helper methods as well, to ease development.
 
     Theme::url()
 
-When used in a view, this method would return the relative path to a theme's public directory.
+When used in a view, this method would return the relative path to a theme's public directory. You can also use it to access any file:
+
+    Theme::url('favicon.ico')
+
