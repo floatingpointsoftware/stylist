@@ -87,16 +87,28 @@ Themes can have parent themes. What does this mean? It means that you can reques
 theme that you have activated, and work its way up a tree. This is really great if you like a particular theme but want to customise 
 just a single view file.
 
-Themes can also inherit stylesheets. In order to do this, a child theme must have a stylesheet name that is identical to its parent. If
-this is the case, then the parent CSS file will be loaded first, followed by the child's css theme. This makes it very easy to create
-"skins" for themes.
-
 ### Defining a parent
 
 It's very easy to define a parent for a theme. You simply define the parent theme inside your theme.json:
 
     "parent": "Another theme"
 
-This will ensure that Stylist will first look in your theme's directories for files and assets, and then look in the parent's theme directories. If your theme's parent also has a parent, then it will continue looking up the tree until it finds the file.
+This will ensure that Stylist will first look in your theme's directories for files and assets, and then look in the parent's theme 
+directories. If your theme's parent also has a parent, then it will continue looking up the tree until it finds the file.
 
-Parents do not need to be activated for your theme to make use of them. Only your theme needs to be activated. However, they do need to be registered. This may be handled by the package that manages your theme, or you can register it yourself.
+Parents do not need to be activated for your theme to make use of them. Only your theme needs to be activated. However, they do need 
+to be registered. This may be handled by the package that manages your theme, or you can register it yourself.
+
+### Stylesheets
+
+Themes can also inherit stylesheets. In order to do this, a child theme must have a stylesheet name that is identical to its parent. If
+this is the case, then the parent CSS file will be loaded first, followed by the child's css theme. This makes it very easy to create
+"skins" for themes, by simply overloading certain styles.
+
+## Helper methods
+
+Stylist has a few helper methods as well, to ease development.
+
+    Theme::url()
+
+When used in a view, this method would return the relative path to a theme's public directory.
