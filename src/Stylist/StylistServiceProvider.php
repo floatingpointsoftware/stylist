@@ -3,21 +3,26 @@ namespace FloatingPoint\Stylist;
 
 use Cache;
 use Config;
-use FloatingPoint\Stylist\Console\PublishAssetsCommand;
 use FloatingPoint\Stylist\Html\ThemeHtmlBuilder;
-use Illuminate\Html\HtmlServiceProvider;
 use Illuminate\Support\AggregateServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 
 class StylistServiceProvider extends AggregateServiceProvider
 {
     /**
+     * Only boot when we need to.
+     *
+     * @var bool
+     */
+    public $defer = true;
+
+    /**
      * Stylist provides the HtmlServiceProvider for ease-of-use.
      *
      * @var array
      */
     protected $providers = [
-        HtmlServiceProvider::class
+        'Illuminate\Html\HtmlServiceProvider'
     ];
 
     /**
@@ -27,6 +32,7 @@ class StylistServiceProvider extends AggregateServiceProvider
     {
         parent::register();
 
+        $this->registerConfiguration();
         $this->registerAliases();
         $this->registerStylist();
         $this->registerThemeBuilder();
@@ -34,9 +40,36 @@ class StylistServiceProvider extends AggregateServiceProvider
     }
 
     /**
+     * Boot the package, in this case also discovering any themes required by stylist.
+     */
+    public function boot()
+    {
+        $this->bootThemes();
+    }
+
+    /**
+     * Once the provided has booted, we can now look at configuration and see if there's
+     * any paths defined to automatically load and register the required themes.
+     */
+    protected function bootThemes()
+    {
+        $paths = $this->app['config']->get('stylist.paths', []);
+
+        foreach ($paths as $path) {
+            Stylist::discover($path);
+        }
+
+        $theme = $this->app['config']->get('stylist.activate', null);
+        
+        if (!is_null($theme)) {
+            Stylist::activate($theme);
+        }
+    }
+
+    /**
      * Sets up the object that will be used for theme registration calls.
      */
-    private function registerStylist()
+    protected function registerStylist()
     {
         $this->app->singleton('stylist', 'FloatingPoint\Stylist\Theme\Stylist');
     }
@@ -64,13 +97,23 @@ class StylistServiceProvider extends AggregateServiceProvider
     }
 
     /**
-     * Register the comamnds available to the package.
+     * Register the commands available to the package.
      */
     private function registerCommands()
     {
         $this->commands(
-            PublishAssetsCommand::class
+            'FloatingPoint\Stylist\Console\PublishAssetsCommand'
         );
+    }
+
+    /**
+     * Setup the configuration that can be used by stylist.
+     */
+    protected function registerConfiguration()
+    {
+        $this->publishes([
+            __DIR__ . '/../config/config.php' => config_path('stylist.php')
+        ]);
     }
 
     /**
@@ -80,6 +123,10 @@ class StylistServiceProvider extends AggregateServiceProvider
      */
     public function provides()
     {
-        return ['Stylist'];
+        return [
+            'Stylist',
+            'Theme'
+        ];
     }
+
 }
