@@ -40,7 +40,8 @@ class ThemeHtmlBuilder
     }
 
     /**
-     * Generate a link to a CSS file.
+     * Generate a link to a CSS file. With Stylist, this could actually generate
+     * numerous style tags, due to CSS inheritance requirements.
      *
      * @param  string  $url
      * @param  array   $attributes
@@ -49,7 +50,20 @@ class ThemeHtmlBuilder
      */
     public function style($url, $attributes = array(), $secure = null)
     {
-        return $this->html->style($this->assetUrl($url), $attributes, $secure);
+        $styles = [];
+        $theme = StylistFacade::current();
+
+        // If our theme has a parent, we want its stylesheet, as well.
+        if ($theme->hasParent()) {
+            $parent = StylistFacade::get($theme->getParent());
+            StylistFacade::activate($parent);
+            $styles[] = $this->style($url, $attributes, $secure);
+            StylistFacade::activate($theme);
+        }
+
+        $styles[] = $this->html->style($this->assetUrl($url), $attributes, $secure);
+
+        return implode("\n", $styles);
     }
 
     /**
@@ -64,6 +78,17 @@ class ThemeHtmlBuilder
     public function image($url, $alt = null, $attributes = array(), $secure = null)
     {
         return $this->html->image($this->assetUrl($url), $alt, $attributes, $secure);
+    }
+
+    /**
+     * Returns the theme's public URI location. This is not a full URL. If you wish
+     * for a full URL, simply add the site's URL configuration to this path.
+     *
+     * @return string
+     */
+    public function url()
+    {
+        return '/'.$this->assetUrl('');
     }
 
     /**

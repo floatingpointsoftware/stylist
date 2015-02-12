@@ -7,7 +7,7 @@ use Tests\TestCase;
 class ThemeBuilderTest extends TestCase
 {
     private $builder;
-
+    
     public function init()
     {
         $this->builder = $this->app->make('stylist.theme');
@@ -42,5 +42,12 @@ class ThemeBuilderTest extends TestCase
         $flashLink = $this->builder->linkAsset('swf/video.swf');
 
         $this->assertContains('/themes/parent-theme/swf/video.swf', $flashLink);
+    }
+
+    public function testAssetUrlResponse()
+    {
+        $url = $this->builder->url();
+
+        $this->assertEquals('/themes/parent-theme/', $url);
     }
 }

@@ -83,7 +83,13 @@ to work with the theme and its json file, and publish the required files.
 
 ## Theme inheritance
 
-Themes can have parent themes. What does this mean? It means that you can request a view, and Stylist will first look to the child theme that you have activated, and work its way up a tree. This is really great if you like a particular theme but want to customise just a single view file.
+Themes can have parent themes. What does this mean? It means that you can request a view, and Stylist will first look to the child 
+theme that you have activated, and work its way up a tree. This is really great if you like a particular theme but want to customise 
+just a single view file.
+
+Themes can also inherit stylesheets. In order to do this, a child theme must have a stylesheet name that is identical to its parent. If
+this is the case, then the parent CSS file will be loaded first, followed by the child's css theme. This makes it very easy to create
+"skins" for themes.
 
 ### Defining a parent
 

@@ -74,6 +74,8 @@ class PublishAssetsCommand extends Command
             $themePath = public_path('themes/' . $theme->getAssetPath());
 
             $this->app['files']->copyDirectory($theme->getPath().'/assets/', $themePath);
+
+            $this->info($theme->getName().' assets published.');
         }
     }
 }
