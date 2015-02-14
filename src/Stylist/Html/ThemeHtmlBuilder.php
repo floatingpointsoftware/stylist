@@ -54,6 +54,7 @@ class ThemeHtmlBuilder
         $theme = StylistFacade::current();
 
         // If our theme has a parent, we want its stylesheet, as well.
+        // @todo: This is dog-ugly - need to figure out a better approach.
         if ($theme->hasParent()) {
             $parent = StylistFacade::get($theme->getParent());
             StylistFacade::activate($parent);

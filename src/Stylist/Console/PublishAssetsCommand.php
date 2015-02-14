@@ -28,6 +28,7 @@ class PublishAssetsCommand extends Command
     public function __construct(Container $app)
     {
         parent::__construct();
+
         $this->app = $app;
     }
 
@@ -72,13 +73,16 @@ class PublishAssetsCommand extends Command
     protected function copyAssets()
     {
         $themes = Stylist::themes();
+        $arguments = $this->arguments();
 
         foreach ($themes as $theme) {
-            $themePath = public_path('themes/' . $theme->getAssetPath());
+            if (!$arguments or in_array($theme->getName(), $arguments)) {
+                $themePath = public_path('themes/' . $theme->getAssetPath());
 
-            $this->app['files']->copyDirectory($theme->getPath().'/assets/', $themePath);
+                $this->app['files']->copyDirectory($theme->getPath() . '/assets/', $themePath);
 
-            $this->info($theme->getName().' assets published.');
+                $this->info($theme->getName() . ' assets published.');
+            }
         }
     }
 }
