@@ -77,6 +77,14 @@ need to ensure that before you publish, your themes are available and registered
     {
         Stylist::registerPaths(Stylist::discover('/path/to/my/themes'));    
     }
+ 
+Then simply run the publish command:
+ 
+    php artisan stylist:publish
+ 
+Or, if you want to publish a select few themes:
+ 
+    php artisan stylist:publish ThemeName AnotherThemeName AndAnotherThem
     
 You'll then have your theme's assets published to their associated directories. It's important to note that the returned array must
 contain array elements that point to the the THEME directory, not the theme's ASSETS directories. This is because stylist will try
