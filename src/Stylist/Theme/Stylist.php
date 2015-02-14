@@ -75,7 +75,9 @@ class Stylist
      */
     public function register(Theme $theme, $activate = false)
     {
-        $this->themes[] = $theme;
+        if (!$this->has($theme->getName())) {
+            $this->themes[] = $theme;
+        }
 
         if ($activate) {
             $this->activate($theme);
@@ -149,6 +151,22 @@ class Stylist
     public function current()
     {
         return $this->activeTheme;
+    }
+
+    /**
+     * Checks to see whether a theme by a given name has been registered.
+     *
+     * @param string $themeName
+     */
+    public function has($themeName)
+    {
+        foreach ($this->themes as $theme) {
+            if ($theme->getName() == $themeName) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
