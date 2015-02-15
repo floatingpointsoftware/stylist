@@ -73,7 +73,7 @@ class PublishAssetsCommand extends Command
     protected function copyAssets()
     {
         $themes = Stylist::themes();
-        $arguments = $this->arguments();
+        $arguments = $this->argument();
 
         foreach ($themes as $theme) {
             if (!$arguments or in_array($theme->getName(), $arguments)) {
