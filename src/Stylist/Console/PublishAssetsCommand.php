@@ -1,6 +1,7 @@
 <?php
 namespace FloatingPoint\Stylist\Console;
 
+use FloatingPoint\Stylist\Theme\Theme;
 use Stylist;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Container\Container;
@@ -44,7 +45,7 @@ class PublishAssetsCommand extends Command
     public function handle()
     {
         $this->setupThemes();
-        $this->copyAssets();
+        $this->publishAssets();
 
         $this->info('Assets published.');
     }
@@ -63,7 +64,7 @@ class PublishAssetsCommand extends Command
             $path = $theme->getPath();
 
             if ($this->app['files']->exists($path.'assets/')) {
-                Stylist::registerPath($path);
+                $this->app['stylist']->registerPath($path);
             }
         }
     }
@@ -71,20 +72,34 @@ class PublishAssetsCommand extends Command
     /**
      * Copies the assets for those themes which were successfully registered with stylist.
      */
-    protected function copyAssets()
+    protected function publishAssets()
     {
-        $themes = Stylist::themes();
+        $themes = $this->app['stylist']->themes();
         $requestedTheme = $this->argument('theme');
 
-        foreach ($themes as $theme) {
-            if (!$requestedTheme or $theme->getName() == $requestedTheme) {
-                $themePath = public_path('themes/' . $theme->getAssetPath());
+        if ($requestedTheme) {
+            $theme = $this->app['stylist']->get($requestedTheme);
 
-                $this->app['files']->copyDirectory($theme->getPath() . '/assets/', $themePath);
-
-                $this->info($theme->getName() . ' assets published.');
-            }
+            return $this->publishSingle($theme);
         }
+
+        foreach ($themes as $theme) {
+            $this->publishSingle($theme);
+        }
+    }
+
+    /**
+     * Publish a single theme's assets.
+     * 
+     * @param Theme $theme
+     */
+    protected function publishSingle(Theme $theme)
+    {
+        $themePath = public_path('themes/' . $theme->getAssetPath());
+
+        $this->app['files']->copyDirectory($theme->getPath().'/assets/', $themePath);
+
+        $this->info($theme->getName().' assets published.');
     }
 
     /**
