@@ -4,6 +4,7 @@ namespace FloatingPoint\Stylist\Console;
 use Stylist;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Container\Container;
+use Symfony\Component\Console\Input\InputArgument;
 
 class PublishAssetsCommand extends Command
 {
@@ -73,10 +74,10 @@ class PublishAssetsCommand extends Command
     protected function copyAssets()
     {
         $themes = Stylist::themes();
-        $arguments = $this->argument();
+        $requestedTheme = $this->argument('theme');
 
         foreach ($themes as $theme) {
-            if (!$arguments or in_array($theme->getName(), $arguments)) {
+            if (!$requestedTheme or $theme->getName() == $requestedTheme) {
                 $themePath = public_path('themes/' . $theme->getAssetPath());
 
                 $this->app['files']->copyDirectory($theme->getPath() . '/assets/', $themePath);
@@ -84,5 +85,17 @@ class PublishAssetsCommand extends Command
                 $this->info($theme->getName() . ' assets published.');
             }
         }
+    }
+
+    /**
+     * Developers can publish a specific theme should they wish.
+     *
+     * @return array
+     */
+    public function getArguments()
+    {
+        return [
+            ['theme', InputArgument::OPTIONAL, 'Name of the theme you wish to publish']
+        ];
     }
 }

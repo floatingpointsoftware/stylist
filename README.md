@@ -82,9 +82,9 @@ Then simply run the publish command:
  
     php artisan stylist:publish
  
-Or, if you want to publish a select few themes:
+Or, if you want to publish a select theme:
  
-    php artisan stylist:publish ThemeName AnotherThemeName AndAnotherThem
+    php artisan stylist:publish ThemeName
     
 You'll then have your theme's assets published to their associated directories. It's important to note that the returned array must
 contain array elements that point to the the THEME directory, not the theme's ASSETS directories. This is because stylist will try
