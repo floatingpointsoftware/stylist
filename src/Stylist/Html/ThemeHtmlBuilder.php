@@ -2,7 +2,7 @@
 namespace FloatingPoint\Stylist\Html;
 
 use FloatingPoint\Stylist\Facades\StylistFacade;
-use Illuminate\Html\HtmlBuilder;
+use Collective\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
 
 class ThemeHtmlBuilder
