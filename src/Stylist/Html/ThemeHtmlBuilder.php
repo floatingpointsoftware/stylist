@@ -2,7 +2,6 @@
 namespace FloatingPoint\Stylist\Html;
 
 use FloatingPoint\Stylist\Facades\StylistFacade;
-use Illuminate\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
 
 class ThemeHtmlBuilder
@@ -18,9 +17,10 @@ class ThemeHtmlBuilder
     private $url;
 
     /**
-     * @param HtmlBuilder $html
+     * @param $html
+     * @param UrlGenerator $url
      */
-    public function __construct(HtmlBuilder $html, UrlGenerator $url)
+    public function __construct($html, UrlGenerator $url)
     {
         $this->html = $html;
         $this->url = $url;
