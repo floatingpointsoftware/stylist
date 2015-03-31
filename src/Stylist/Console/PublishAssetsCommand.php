@@ -90,7 +90,7 @@ class PublishAssetsCommand extends Command
 
     /**
      * Publish a single theme's assets.
-     * 
+     *
      * @param Theme $theme
      */
     protected function publishSingle(Theme $theme)

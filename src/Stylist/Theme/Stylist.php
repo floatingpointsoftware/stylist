@@ -225,6 +225,10 @@ class Stylist
     protected function rglob($pattern, $flags = 0) {
         $files = glob($pattern, $flags);
 
+        if (false === $files) {
+            $files = [];
+        }
+        
         foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
             $files = array_merge($files, $this->rglob($dir.'/'.basename($pattern), $flags));
         }
