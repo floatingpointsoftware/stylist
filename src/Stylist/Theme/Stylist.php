@@ -226,7 +226,10 @@ class Stylist
         $files = glob($pattern, $flags);
 
         foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
-            $files = array_merge($files, $this->rglob($dir.'/'.basename($pattern), $flags));
+            $file = $dir.'/'.basename($pattern);
+            if (file_exists($file)) {
+                $files[] = $file;
+            }
         }
 
         return $files;
