@@ -234,7 +234,7 @@ class Stylist
         if ($possibleFiles === false) {
             $possibleFiles = [];
         }
-        
+
         foreach ($possibleFiles as $dir) {
             $files = array_merge($files, $this->rglob($dir.'/'.basename($pattern), $flags));
         }
