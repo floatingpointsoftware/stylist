@@ -1,10 +1,9 @@
 # Stylist
 ## About
 
-[![Build Status](https://travis-ci.org/floatingpointsoftware/stylist.svg?branch=master)](https://travis-ci.org/floatingpointsoftware/stylist)
-
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/floatingpointsoftware/stylist/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/floatingpointsoftware/stylist/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/floatingpointsoftware/stylist/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/floatingpointsoftware/stylist/?branch=master)
+[![Build Status](https://img.shields.io/travis/floatingpointsoftware/stylist.svg?branch=master)](https://travis-ci.org/floatingpointsoftware/stylist)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/coverage/g/floatingpointsoftware/stylist.svg?branch=master)](https://scrutinizer-ci.com/g/floatingpointsoftware/stylist/?branch=master)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/floatingpointsoftware/stylist/master.svg)](https://scrutinizer-ci.com/g/floatingpointsoftware/stylist/?branch=master)
 
 Stylist is a Laravel 5.0+ compatible package for theming your Laravel applications.
 
