@@ -228,8 +228,14 @@ class Stylist
         if (false === $files) {
             $files = [];
         }
+
+        $possibleFiles = glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT);
+
+        if ($possibleFiles === false) {
+            $possibleFiles = [];
+        }
         
-        foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
+        foreach ($possibleFiles as $dir) {
             $files = array_merge($files, $this->rglob($dir.'/'.basename($pattern), $flags));
         }
 

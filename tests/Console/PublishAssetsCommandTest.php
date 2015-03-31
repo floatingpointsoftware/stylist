@@ -10,7 +10,8 @@ class PublishAssetsCommandTest extends TestCase
     public function testAssetPublishing()
     {
         $this->app['files']->cleanDirectory(public_path());
-        $this->app['stylist']->registerPaths(Stylist::discover(__DIR__.'/../Stubs/Themes'));
+
+        Stylist::registerPaths(Stylist::discover(__DIR__.'/../Stubs/Themes'));
 
         $artisan = $this->app->make('Illuminate\Contracts\Console\Kernel');
 
