@@ -25,7 +25,6 @@ class StylistServiceProvider extends AggregateServiceProvider
      */
     public function register()
     {
-        dd('wtf');
         parent::register();
 
         $this->registerConfiguration();

@@ -14,6 +14,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     public function setUp()
     {
         parent::setUp();
+
         $this->init();
     }
 
@@ -24,10 +25,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function getPackageProviders()
     {
-        return [
-            'Collective\Html\HtmlServiceProvider',
+        $providers = [
             'FloatingPoint\Stylist\StylistServiceProvider',
         ];
+
+        return $providers;
     }
 
     protected function getPackageAliases($app)
