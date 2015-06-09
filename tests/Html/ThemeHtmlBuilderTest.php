@@ -2,6 +2,7 @@
 namespace Tests\Html;
 
 use FloatingPoint\Stylist\Facades\StylistFacade;
+use FloatingPoint\Stylist\Html\ThemeHtmlBuilder;
 use Tests\TestCase;
 
 class ThemeHtmlBuilderTest extends TestCase
@@ -10,7 +11,7 @@ class ThemeHtmlBuilderTest extends TestCase
     
     public function init()
     {
-        $this->builder = $this->app->make('stylist.theme');
+        $this->builder = new ThemeHtmlBuilder($this->app['html'], $this->app['url']);;
 
         StylistFacade::registerPath(__DIR__.'/../Stubs/Themes/Parent');
         StylistFacade::activate('Parent theme');

@@ -7,13 +7,13 @@ class TestCase extends \Orchestra\Testbench\TestCase
 {
     public function tearDown()
     {
+        parent::tearDown();
         m::close();
     }
 
     public function setUp()
     {
         parent::setUp();
-
         $this->init();
     }
 
@@ -22,10 +22,19 @@ class TestCase extends \Orchestra\Testbench\TestCase
         // Stub/template method - overloadable by children
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders()
     {
         return [
-            'FloatingPoint\Stylist\StylistServiceProvider'
+            'Collective\Html\HtmlServiceProvider',
+            'FloatingPoint\Stylist\StylistServiceProvider',
+        ];
+    }
+
+    protected function getPackageAliases($app)
+    {
+        return [
+            'Stylist' => 'FloatingPoint\Stylist\Facades\StylistFacade',
+            'Theme' => 'FloatingPoint\Stylist\Facades\ThemeFacade',
         ];
     }
 }

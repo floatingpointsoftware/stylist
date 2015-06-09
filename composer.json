@@ -13,14 +13,13 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/html": "5.0.*",
-        "illuminate/support": "5.0.*"
+        "laravelcollective/html": "~5.0",
+        "illuminate/support": "~5.0"
     },
     "require-dev": {
         "mockery/mockery": "dev-master@dev",
-        "orchestra/testbench": "3.0.*@dev",
-        "phpunit/phpunit": "4.2.*",
-        "barryvdh/laravel-ide-helper": "~2.0"
+        "orchestra/testbench": "3.0.x",
+        "phpunit/phpunit": "4.2.*"
     },
     "autoload": {
         "psr-4": {
