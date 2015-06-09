@@ -18,8 +18,8 @@
     },
     "require-dev": {
         "mockery/mockery": "dev-master@dev",
-        "orchestra/testbench": "3.0.x",
-        "phpunit/phpunit": "4.2.*"
+        "orchestra/testbench": "3.0.*",
+        "phpunit/phpunit": "~4.5"
     },
     "autoload": {
         "psr-4": {
@@ -28,12 +28,6 @@
         }
     },
     "minimum-stability": "dev",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git://github.com/orchestral/phpseclib.git"
-        }
-    ],
 	"config": {
 		"preferred-install": "dist"
 	}

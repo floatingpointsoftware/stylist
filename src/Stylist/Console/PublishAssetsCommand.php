@@ -20,21 +20,6 @@ class PublishAssetsCommand extends Command
     protected $description = 'Publish assets associated with Stylist themes.';
 
     /**
-     * @var
-     */
-    private $app;
-
-    /**
-     * @param Container $app
-     */
-    public function __construct(Container $app)
-    {
-        parent::__construct();
-
-        $this->app = $app;
-    }
-
-    /**
      * Fire the command, running through the following steps:
      *
      *   1. Install the migrations table
@@ -56,15 +41,15 @@ class PublishAssetsCommand extends Command
      */
     protected function setupThemes()
     {
-        $this->app['events']->fire('stylist.publishing');
+        $this->laravel['events']->fire('stylist.publishing');
 
         $themes = Stylist::themes();
 
         foreach ($themes as $theme) {
             $path = $theme->getPath();
 
-            if ($this->app['files']->exists($path.'assets/')) {
-                $this->app['stylist']->registerPath($path);
+            if ($this->laravel['files']->exists($path.'assets/')) {
+                $this->laravel['stylist']->registerPath($path);
             }
         }
     }
@@ -74,11 +59,11 @@ class PublishAssetsCommand extends Command
      */
     protected function publishAssets()
     {
-        $themes = $this->app['stylist']->themes();
+        $themes = $this->laravel['stylist']->themes();
         $requestedTheme = $this->argument('theme');
 
         if ($requestedTheme) {
-            $theme = $this->app['stylist']->get($requestedTheme);
+            $theme = $this->laravel['stylist']->get($requestedTheme);
 
             return $this->publishSingle($theme);
         }
@@ -97,7 +82,7 @@ class PublishAssetsCommand extends Command
     {
         $themePath = public_path('themes/' . $theme->getAssetPath());
 
-        $this->app['files']->copyDirectory($theme->getPath().'/assets/', $themePath);
+        $this->laravel['files']->copyDirectory($theme->getPath().'/assets/', $themePath);
 
         $this->info($theme->getName().' assets published.');
     }

@@ -23,13 +23,12 @@ class TestCase extends \Orchestra\Testbench\TestCase
         // Stub/template method - overloadable by children
     }
 
-    protected function getPackageProviders()
+    protected function getPackageProviders($app)
     {
-        $providers = [
+        return [
+            'Collective\Html\HtmlServiceProvider',
             'FloatingPoint\Stylist\StylistServiceProvider',
         ];
-
-        return $providers;
     }
 
     protected function getPackageAliases($app)
