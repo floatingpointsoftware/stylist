@@ -123,10 +123,10 @@ class StylistServiceProvider extends AggregateServiceProvider
      */
     public function provides()
     {
-        return [
+        return array_merge(parent::provides(), [
             'Stylist',
             'Theme'
-        ];
+        ]);
     }
 
 }
