@@ -91,7 +91,7 @@ class ThemeHtmlBuilder
      */
     public function url($file = '')
     {
-        return '/'.$this->assetUrl($file);
+        return url($this->assetUrl($file));
     }
 
     /**
