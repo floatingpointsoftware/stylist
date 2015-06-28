@@ -47,7 +47,7 @@ class ThemeHtmlBuilderTest extends TestCase
 
     public function testAssetUrlResponse()
     {
-        $this->assertEquals('/themes/parent-theme/', $this->builder->url());
-        $this->assertEquals('/themes/parent-theme/favicon.ico', $this->builder->url('favicon.ico'));
+        $this->assertEquals(url('themes/parent-theme/'), $this->builder->url());
+        $this->assertEquals(url('themes/parent-theme/favicon.ico'), $this->builder->url('favicon.ico'));
     }
 }
