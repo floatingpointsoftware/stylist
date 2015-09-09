@@ -127,7 +127,9 @@ class Stylist
 
         $this->activateFinderPaths($theme);
 
-        Log::info("Using theme [{$theme->getName()}]");
+        if (config('stylist.log-current-theme')) {
+            Log::info("Using theme [{$theme->getName()}]");
+        }
     }
 
     /**
