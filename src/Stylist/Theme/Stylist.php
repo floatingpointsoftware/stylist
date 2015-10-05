@@ -5,7 +5,6 @@ namespace FloatingPoint\Stylist\Theme;
 use Cache;
 use FloatingPoint\Stylist\Theme\Exceptions\ThemeNotFoundException;
 use Illuminate\Container\Container;
-use Log;
 
 /**
  * Class Stylist
@@ -126,8 +125,6 @@ class Stylist
         $this->activeTheme = $theme;
 
         $this->activateFinderPaths($theme);
-
-        Log::info("Using theme [{$theme->getName()}]");
     }
 
     /**
