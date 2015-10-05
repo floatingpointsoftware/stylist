@@ -9,7 +9,7 @@ Stylist is a Laravel 5.0+ compatible package for theming your Laravel applicatio
 
 Via the usual composer command:
 
-    composer require floatingpoint/stylist dev-master
+    composer require floatingpoint/stylist
 
 Then, make sure the Stylist service provider is made available to your application by updating your config/app.php:
 
