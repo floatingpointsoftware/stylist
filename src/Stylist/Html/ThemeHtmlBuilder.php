@@ -1,8 +1,8 @@
 <?php
 namespace FloatingPoint\Stylist\Html;
 
+use Collective\Html\HtmlBuilder;
 use FloatingPoint\Stylist\Facades\StylistFacade;
-use Illuminate\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
 
 class ThemeHtmlBuilder
@@ -19,6 +19,7 @@ class ThemeHtmlBuilder
 
     /**
      * @param HtmlBuilder $html
+     * @param UrlGenerator $url
      */
     public function __construct(HtmlBuilder $html, UrlGenerator $url)
     {
@@ -90,7 +91,7 @@ class ThemeHtmlBuilder
      */
     public function url($file = '')
     {
-        return '/'.$this->assetUrl($file);
+        return url($this->assetUrl($file));
     }
 
     /**

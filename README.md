@@ -2,8 +2,6 @@
 ## About
 
 [![Build Status](https://img.shields.io/travis/floatingpointsoftware/stylist.svg?branch=master)](https://travis-ci.org/floatingpointsoftware/stylist)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/coverage/g/floatingpointsoftware/stylist.svg)](https://scrutinizer-ci.com/g/floatingpointsoftware/stylist/?branch=master)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/floatingpointsoftware/stylist/master.svg)](https://scrutinizer-ci.com/g/floatingpointsoftware/stylist/?branch=master)
 
 Stylist is a Laravel 5.0+ compatible package for theming your Laravel applications.
 
@@ -11,7 +9,7 @@ Stylist is a Laravel 5.0+ compatible package for theming your Laravel applicatio
 
 Via the usual composer command:
 
-    composer require floatingpoint/stylist dev-master
+    composer require floatingpoint/stylist
 
 Then, make sure the Stylist service provider is made available to your application by updating your config/app.php:
 

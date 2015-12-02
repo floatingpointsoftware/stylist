@@ -12,15 +12,14 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "illuminate/html": "5.0.*",
-        "illuminate/support": "5.0.*"
+        "php": ">=5.5.0",
+        "laravelcollective/html": "~5.0",
+        "illuminate/support": "~5.0"
     },
     "require-dev": {
         "mockery/mockery": "dev-master@dev",
-        "orchestra/testbench": "3.0.*@dev",
-        "phpunit/phpunit": "4.2.*",
-        "barryvdh/laravel-ide-helper": "~2.0"
+        "orchestra/testbench": "3.0.*",
+        "phpunit/phpunit": "~4.5"
     },
     "autoload": {
         "psr-4": {
@@ -29,12 +28,6 @@
         }
     },
     "minimum-stability": "dev",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git://github.com/orchestral/phpseclib.git"
-        }
-    ],
 	"config": {
 		"preferred-install": "dist"
 	}

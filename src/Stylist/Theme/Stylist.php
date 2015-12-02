@@ -5,7 +5,6 @@ namespace FloatingPoint\Stylist\Theme;
 use Cache;
 use FloatingPoint\Stylist\Theme\Exceptions\ThemeNotFoundException;
 use Illuminate\Container\Container;
-use Log;
 
 /**
  * Class Stylist
@@ -58,6 +57,7 @@ class Stylist
 
     /**
      * @param Loader $themeLoader
+     * @param Container $app
      */
     public function __construct(Loader $themeLoader, Container $app)
     {
@@ -70,7 +70,7 @@ class Stylist
      * Register a new theme based on its path. An optional
      * parameter allows the theme to be activated as soon as its registered.
      *
-     * @param string $path
+     * @param Theme $theme
      * @param bool $activate
      */
     public function register(Theme $theme, $activate = false)
@@ -125,8 +125,6 @@ class Stylist
         $this->activeTheme = $theme;
 
         $this->activateFinderPaths($theme);
-
-        Log::info("Using theme [{$theme->getName()}]");
     }
 
     /**
@@ -136,11 +134,11 @@ class Stylist
      */
     protected function activateFinderPaths(Theme $theme)
     {
+        $this->view->addLocation($theme->getPath().'/views/');
+
         if ($theme->hasParent()) {
             $this->activateFinderPaths($this->get($theme->getParent()));
         }
-
-        $this->view->addLocation($theme->getPath().'/views/');
     }
 
     /**
@@ -157,6 +155,7 @@ class Stylist
      * Checks to see whether a theme by a given name has been registered.
      *
      * @param string $themeName
+     * @return bool
      */
     public function has($themeName)
     {
@@ -225,9 +224,11 @@ class Stylist
     protected function rglob($pattern, $flags = 0) {
         $files = glob($pattern, $flags);
 
-        if (false === $files) {
-            $files = [];
+        if ($files) {
+            return $files;
         }
+
+        $files = [];
 
         $possibleFiles = glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT);
 

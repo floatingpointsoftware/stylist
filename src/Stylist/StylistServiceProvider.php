@@ -4,25 +4,20 @@ namespace FloatingPoint\Stylist;
 use Cache;
 use Config;
 use FloatingPoint\Stylist\Html\ThemeHtmlBuilder;
+use FloatingPoint\Stylist\Theme\Loader;
+use FloatingPoint\Stylist\Theme\Stylist;
 use Illuminate\Support\AggregateServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 
 class StylistServiceProvider extends AggregateServiceProvider
 {
     /**
-     * Only boot when we need to.
-     *
-     * @var bool
-     */
-    public $defer = true;
-
-    /**
      * Stylist provides the HtmlServiceProvider for ease-of-use.
      *
      * @var array
      */
     protected $providers = [
-        'Illuminate\Html\HtmlServiceProvider'
+        'Collective\Html\HtmlServiceProvider'
     ];
 
     /**
@@ -33,8 +28,8 @@ class StylistServiceProvider extends AggregateServiceProvider
         parent::register();
 
         $this->registerConfiguration();
-        $this->registerAliases();
         $this->registerStylist();
+        $this->registerAliases();
         $this->registerThemeBuilder();
         $this->registerCommands();
     }
@@ -72,7 +67,9 @@ class StylistServiceProvider extends AggregateServiceProvider
      */
     protected function registerStylist()
     {
-        $this->app->singleton('stylist', 'FloatingPoint\Stylist\Theme\Stylist');
+        $this->app->bindShared('stylist', function($app) {
+            return new Stylist(new Loader, $app);
+        });
     }
 
     /**
@@ -80,7 +77,7 @@ class StylistServiceProvider extends AggregateServiceProvider
      */
     protected function registerThemeBuilder()
     {
-        $this->app->bindShared('stylist.theme', function($app)
+        $this->app->singleton('stylist.theme', function($app)
         {
             return new ThemeHtmlBuilder($app['html'], $app['url']);
         });
@@ -95,6 +92,8 @@ class StylistServiceProvider extends AggregateServiceProvider
 
         $aliasLoader->alias('Stylist', 'FloatingPoint\Stylist\Facades\StylistFacade');
         $aliasLoader->alias('Theme', 'FloatingPoint\Stylist\Facades\ThemeFacade');
+
+        $this->app->alias('stylist', 'FloatingPoint\Stylist\Theme\Stylist');
     }
 
     /**
@@ -124,10 +123,10 @@ class StylistServiceProvider extends AggregateServiceProvider
      */
     public function provides()
     {
-        return [
+        return array_merge(parent::provides(), [
             'Stylist',
             'Theme'
-        ];
+        ]);
     }
 
 }
