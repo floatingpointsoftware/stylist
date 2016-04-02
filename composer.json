@@ -1,5 +1,5 @@
 {
-    "name": "jevets/stylist",
+    "name": "floatingpoint/stylist",
     "description": "Laravel 5 theming package.",
     "authors": [
         {
@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Jevets\\Stylist\\": "src/Stylist",
+            "FloatingPoint\\Stylist\\": "src/Stylist",
             "Tests\\": "tests"
         }
     },
