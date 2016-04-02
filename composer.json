@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "FloatingPoint\\Stylist\\": "src/Stylist",
+            "Jevets\\Stylist\\": "src/Stylist",
             "Tests\\": "tests"
         }
     },
