@@ -67,7 +67,8 @@ class StylistServiceProvider extends AggregateServiceProvider
      */
     protected function registerStylist()
     {
-        $this->app->bindShared('stylist', function($app) {
+        $this->app->singleton('stylist', function($app)
+        {
             return new Stylist(new Loader, $app);
         });
     }
