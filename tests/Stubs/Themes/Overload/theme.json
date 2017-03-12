@@ -1,0 +1,5 @@
+{
+	"name": "Overloader",
+	"description": "This is the overloaded theme.",
+	"parent": "Child theme"
+}

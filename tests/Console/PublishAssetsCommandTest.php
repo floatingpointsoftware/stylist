@@ -13,9 +13,9 @@ class PublishAssetsCommandTest extends TestCase
 
         $artisan = $this->app->make('Illuminate\Contracts\Console\Kernel');
 
-        File::shouldReceive('exists')->andReturn(true)->times(8);
-        File::shouldReceive('get')->times(6);
-        File::shouldReceive('copyDirectory')->times(3);
+        File::shouldReceive('exists')->andReturn(true)->times(12);
+        File::shouldReceive('get')->times(9);
+        File::shouldReceive('copyDirectory')->times(4);
 
         // Action
         $artisan->call('stylist:publish');

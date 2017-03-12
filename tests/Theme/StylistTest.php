@@ -23,7 +23,7 @@ class StylistTest extends \Tests\TestCase
         $stylist = new Stylist(new Loader, $this->app);
         $themes = $stylist->discover(__DIR__.'/../Stubs');
 
-        $this->assertCount(2, $themes);
+        $this->assertCount(3, $themes);
     }
 
     public function testCacheManagement()
@@ -72,5 +72,19 @@ class StylistTest extends \Tests\TestCase
     {
         $stylist = new Stylist(new Loader, $this->app);
         $stylist->get('invalidtheme');
+    }
+
+    public function testThemeViewIsOverloadable()
+    {
+        $stylist = new Stylist(new Loader, $this->app);
+        $paths = $stylist->discover(__DIR__.'/../Stubs');
+
+        $stylist->registerPaths($paths);
+        $stylist->activate($stylist->get('Overloader'));
+
+        $view = $this->app->make('view');
+
+        $this->assertTrue($view->exists('partials.menu'));
+        $this->assertSame('Overload', $view->make('partials.menu')->render());
     }
 }
