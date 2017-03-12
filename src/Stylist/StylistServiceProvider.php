@@ -48,17 +48,18 @@ class StylistServiceProvider extends AggregateServiceProvider
      */
     protected function bootThemes()
     {
-        $paths = $this->app['config']->get('stylist.paths', []);
+        $stylist = $this->app['stylist'];
+        $paths = $this->app['config']->get('stylist.themes.paths', []);
 
         foreach ($paths as $path) {
-            $themePaths = Stylist::discover($path);
-            Stylist::registerPaths($themePaths);
+            $themePaths = $stylist->discover($path);
+            $stylist->registerPaths($themePaths);
         }
 
-        $theme = $this->app['config']->get('stylist.activate', null);
+        $theme = $this->app['config']->get('stylist.themes.activate', null);
 
         if (!is_null($theme)) {
-            Stylist::activate($theme);
+            $stylist->activate($theme, true);
         }
     }
 
