@@ -84,6 +84,10 @@ class PublishAssetsCommand extends Command
 
         $this->laravel['files']->copyDirectory($theme->getPath().'/assets/', $themePath);
 
+        if ($this->laravel['files']->exists($themePath)) {
+            touch($themePath);
+        }
+
         $this->info($theme->getName().' assets published.');
     }
 
