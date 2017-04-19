@@ -92,7 +92,7 @@ class Stylist
      */
     public function registerPath($path, $activate = false)
     {
-        $realPath = realpath($path);
+        $realPath = realpath($this->app->basePath() . '/' . $path);
         $theme = $this->themeLoader->fromPath($realPath);
 
         $this->register($theme, $activate);
