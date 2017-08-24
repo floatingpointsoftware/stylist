@@ -30,5 +30,13 @@
     "minimum-stability": "dev",
 	"config": {
 		"preferred-install": "dist"
-	}
+	},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "FloatingPoint\\Stylist\\StylistServiceProvider"
+            ]
+        }
+    }
+
 }
