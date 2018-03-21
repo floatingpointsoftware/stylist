@@ -134,7 +134,7 @@ class Stylist
      */
     protected function activateFinderPaths(Theme $theme)
     {
-        $this->view->addLocation($theme->getPath().'/views/');
+        $this->view->getFinder()->prependLocation($theme->getPath().'/views/');
 
         if ($theme->hasParent()) {
             $this->activateFinderPaths($this->get($theme->getParent()));
