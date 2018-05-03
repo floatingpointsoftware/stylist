@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=5.5.0",
-        "laravelcollective/html": "~5.0",
+        "laravelcollective/html": "~5.4",
         "illuminate/support": "~5.4"
     },
     "require-dev": {
