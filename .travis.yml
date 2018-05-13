@@ -6,4 +6,4 @@ php:
 
 before_script:
   - composer self-update
-  - composer install
+  - travis_wait 30 composer install
