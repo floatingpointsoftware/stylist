@@ -3,7 +3,7 @@
 
 [![Build Status](https://img.shields.io/travis/floatingpointsoftware/stylist.svg?branch=master)](https://travis-ci.org/floatingpointsoftware/stylist)
 
-Stylist is a Laravel 5.0+ compatible package for theming your Laravel applications.
+Stylist is a Laravel 5.5+ compatible package for theming your Laravel applications.
 
 ## Installation
 
@@ -36,9 +36,9 @@ So, what happens when you now load views?
 
 ## How Stylist works
 
-Everytime you register a new theme and activate it, Stylist then becomes aware of a new location to search for views, stylesheets, 
-javascripts and image files. Stylist has a few opinions of how to structure your theme directories as well. The reason for this is 
-so that every theme follows the same approach. For example, when you point Stylist to your theme directory, it should have the 
+Everytime you register a new theme and activate it, Stylist then becomes aware of a new location to search for views, stylesheets,
+javascripts and image files. Stylist has a few opinions of how to structure your theme directories as well. The reason for this is
+so that every theme follows the same approach. For example, when you point Stylist to your theme directory, it should have the
 following directories (if it needs them):
 
     /public/stylesheets
@@ -66,7 +66,7 @@ This means that when you make a call to say, Theme::image, the output url in you
 
 Of course, if you don't want Stylist to manage that for you, simply use the usual HTML facade.
 
-There's one step we're still missing - and that's the publishing of your theme assets. This isn't a necessary step - you can easily 
+There's one step we're still missing - and that's the publishing of your theme assets. This isn't a necessary step - you can easily
 just copy your theme's assets from it's directory, into the appropriate directory in the public directory in Laravel 5. You simply
 need to ensure that before you publish, your themes are available and registered. Service providers are a great place to do this.
 
@@ -74,23 +74,23 @@ need to ensure that before you publish, your themes are available and registered
     {
         Stylist::registerPaths(Stylist::discover('/path/to/my/themes'));    
     }
- 
+
 Then simply run the publish command:
- 
+
     php artisan stylist:publish
- 
+
 Or, if you want to publish a select theme:
- 
+
     php artisan stylist:publish ThemeName
-    
+
 You'll then have your theme's assets published to their associated directories. It's important to note that the returned array must
 contain array elements that point to the the THEME directory, not the theme's ASSETS directories. This is because stylist will try
 to work with the theme and its json file, and publish the required files.
 
 ## Theme inheritance
 
-Themes can have parent themes. What does this mean? It means that you can request a view, and Stylist will first look to the child 
-theme that you have activated, and work its way up a tree. This is really great if you like a particular theme but want to customise 
+Themes can have parent themes. What does this mean? It means that you can request a view, and Stylist will first look to the child
+theme that you have activated, and work its way up a tree. This is really great if you like a particular theme but want to customise
 just a single view file.
 
 ### Defining a parent
@@ -99,10 +99,10 @@ It's very easy to define a parent for a theme. You simply define the parent them
 
     "parent": "Another theme"
 
-This will ensure that Stylist will first look in your theme's directories for files and assets, and then look in the parent's theme 
+This will ensure that Stylist will first look in your theme's directories for files and assets, and then look in the parent's theme
 directories. If your theme's parent also has a parent, then it will continue looking up the tree until it finds the file.
 
-Parents do not need to be activated for your theme to make use of them. Only your theme needs to be activated. However, they do need 
+Parents do not need to be activated for your theme to make use of them. Only your theme needs to be activated. However, they do need
 to be registered. This may be handled by the package that manages your theme, or you can register it yourself.
 
 ### Stylesheets
@@ -120,4 +120,3 @@ Stylist has a few helper methods as well, to ease development.
 When used in a view, this method would return the relative path to a theme's public directory. You can also use it to access any file:
 
     Theme::url('favicon.ico')
-
