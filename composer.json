@@ -1,7 +1,8 @@
 {
   "name": "floatingpoint/stylist",
   "description": "Laravel 5 theming package.",
-  "authors": [{
+  "authors": [
+    {
       "name": "Kirk Bushell",
       "email": "torm3nt@gmail.com"
     },
