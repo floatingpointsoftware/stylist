@@ -1,34 +1,34 @@
 {
-    "name": "floatingpoint/stylist",
-    "description": "Laravel 5 theming package.",
-    "authors": [
-        {
-            "name": "Kirk Bushell",
-            "email": "torm3nt@gmail.com"
-        },
-        {
-            "name": "Mike Dugan",
-            "email": "mike@mjdugan.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.5.0",
-        "laravelcollective/html": "~5.0",
-        "illuminate/support": "~5.0"
+  "name": "floatingpoint/stylist",
+  "description": "Laravel 5 theming package.",
+  "authors": [
+    {
+      "name": "Kirk Bushell",
+      "email": "torm3nt@gmail.com"
     },
-    "require-dev": {
-        "mockery/mockery": "dev-master@dev",
-        "orchestra/testbench": "3.0.*",
-        "phpunit/phpunit": "~4.5"
-    },
-    "autoload": {
-        "psr-4": {
-            "FloatingPoint\\Stylist\\": "src/Stylist",
-            "Tests\\": "tests"
-        }
-    },
-    "minimum-stability": "dev",
-	"config": {
-		"preferred-install": "dist"
-	}
+    {
+      "name": "Mike Dugan",
+      "email": "mike@mjdugan.com"
+    }
+  ],
+  "require": {
+    "php": "^7.0",
+    "laravelcollective/html": "~5.5",
+    "illuminate/support": "~5.5"
+  },
+  "require-dev": {
+    "mockery/mockery": "^0.9.5",
+    "orchestra/testbench": "~3.0",
+    "phpunit/phpunit": "~6.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "FloatingPoint\\Stylist\\": "src/Stylist",
+      "Tests\\": "tests"
+    }
+  },
+  "minimum-stability": "dev",
+  "config": {
+    "preferred-install": "dist"
+  }
 }
