@@ -50,4 +50,28 @@ class ThemeHtmlBuilderTest extends TestCase
         $this->assertEquals(url('themes/parent-theme/'), $this->builder->url());
         $this->assertEquals(url('themes/parent-theme/favicon.ico'), $this->builder->url('favicon.ico'));
     }
+    
+    public function testSubfolderAssets()
+    {
+        // set subfolder
+        config(['app.url' => 'http://localhost/subfolder']);
+        config(['app.asset_url' => 'http://localhost/subfolder']);
+        $this->app['url']->forceRootUrl('/subfolder');
+
+        // check script in subfolder
+        $script = $this->builder->script('js/app.js');
+        $this->assertContains('/subfolder/themes/parent-theme/js/app.js', (string) $script);
+
+        // check style in subfolder
+        $style = $this->builder->style('css/app.css');
+        $this->assertContains('/subfolder/themes/parent-theme/css/app.css', (string) $style);
+
+        // check asset url in subfolder
+        $url = $this->builder->url('css/app.css');
+        $this->assertContains('/subfolder/themes/parent-theme/css/app.css', (string) $url);
+
+        // check link in subfolder
+        $link = $this->builder->linkAsset('css/app.css');
+        $this->assertContains('/subfolder/themes/parent-theme/css/app.css', (string) $link);
+    }
 }
