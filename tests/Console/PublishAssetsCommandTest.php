@@ -13,15 +13,13 @@ class PublishAssetsCommandTest extends TestCase
 
         $artisan = $this->app->make('Illuminate\Contracts\Console\Kernel');
 
-        File::shouldReceive('exists')->andReturn(true)->times(12);
-        File::shouldReceive('get')->times(9);
-        File::shouldReceive('copyDirectory')->times(4);
-
         // Action
         $artisan->call('stylist:publish');
 
         // Assert
-//        $this->assertTrue($this->app['files']->exists(public_path('themes/child-theme')));
-//        $this->assertFalse($this->app['files']->exists(public_path('themes/parent-theme')));
+       $this->assertTrue($this->app['files']->isDirectory(public_path('themes/child-theme')));
+       $this->assertTrue($this->app['files']->isDirectory(public_path('themes/overloader')));
+       $this->assertTrue($this->app['files']->isDirectory(public_path('themes/parent-theme')));
+
     }
 }

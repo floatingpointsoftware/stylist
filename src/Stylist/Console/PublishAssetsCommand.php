@@ -49,6 +49,7 @@ class PublishAssetsCommand extends Command
             $path = $theme->getPath();
 
             if ($this->laravel['files']->exists($path.'assets/')) {
+
                 $this->laravel['stylist']->registerPath($path);
             }
         }
