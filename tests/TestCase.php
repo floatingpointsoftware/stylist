@@ -5,13 +5,13 @@ use Mockery as m;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
         m::close();
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

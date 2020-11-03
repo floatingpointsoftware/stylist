@@ -15,6 +15,16 @@ Then, make sure the Stylist service provider is made available to your applicati
 
     'FloatingPoint\Stylist\StylistServiceProvider',
 
+## Version Compatibility
+
+ Laravel  | Stylist
+:---------|:----------
+ 5.5      | <1.0
+ 5.8      | 1.1
+ 6.x      | 2.x
+ 7.x      | 3.x
+
+
 You're now ready to go!
 
 ## Setting up a theme

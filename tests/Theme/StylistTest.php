@@ -4,6 +4,7 @@ namespace Tests\Theme;
 use FloatingPoint\Stylist\Theme\Loader;
 use FloatingPoint\Stylist\Theme\Stylist;
 use FloatingPoint\Stylist\Theme\Theme;
+use FloatingPoint\Stylist\Theme\Exceptions\ThemeNotFoundException;
 
 class StylistTest extends \Tests\TestCase
 {
@@ -66,10 +67,11 @@ class StylistTest extends \Tests\TestCase
     }
 
     /**
-     * @expectedException FloatingPoint\Stylist\Theme\Exceptions\ThemeNotFoundException
+     * @expectException FloatingPoint\Stylist\Theme\Exceptions\ThemeNotFoundException
      */
     public function testInvalidTheme()
     {
+        $this->expectException(ThemeNotFoundException::class);
         $stylist = new Stylist(new Loader, $this->app);
         $stylist->get('invalidtheme');
     }
