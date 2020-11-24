@@ -83,14 +83,17 @@ class ThemeHtmlBuilder
     }
 
     /**
-     * Returns the theme's public URI location. This is not a full URL. If you wish
-     * for a full URL, simply add the site's URL configuration to this path.
+     * Checks if HTTPS / HTTP and returns full URL.
      *
      * @param string $file
      * @return string
      */
     public function url($file = '')
     {
+        if ($this->isSecure()) {
+            return secure_url($this->assetUrl($file));
+        }
+
         return url($this->assetUrl($file));
     }
 
@@ -129,5 +132,23 @@ class ThemeHtmlBuilder
         }
 
         return $url;
+    }
+
+    protected function isSecure(){
+
+        if (isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+            return true;
+        }
+
+        if (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443) {
+            return true;
+        }
+
+        // AWS Load Balancer
+        if (isset($_SERVER['HTTP_X_FORWARDED_PORT']) && $_SERVER['HTTP_X_FORWARDED_PORT']??'' == 443) {
+            return true;
+        }
+
+        return false;
     }
 }
